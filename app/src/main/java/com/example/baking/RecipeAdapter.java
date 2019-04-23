@@ -11,9 +11,20 @@ import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
+    private Context rContext;
     public static List<RecipeList> rRecipeList;
     private static final String TAG = "RecipeAdapter";
-    private Context rContext;
+    private OnItemClickListener rListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        rListener = listener;
+    }
+
+
 
     public RecipeAdapter(Context Context, ArrayList<RecipeList> recipelist) {
         rRecipeList = recipelist;
