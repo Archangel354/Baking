@@ -13,15 +13,15 @@ public class RecipeList {
         rImage = image;
     }
 
-    public String getrName() {
+    public String getName() {
         return rName;
     }
 
-    public String getrServings() {
+    public String getServings() {
         return rServings;
     }
 
-    public String getrImage() {
+    public String getImage() {
         return rImage;
     }
 }

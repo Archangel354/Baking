@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickLister{
+public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener{
 
     /** Adapter for the gridview of movies from the JSON data */
     private RecipeAdapter rAdapter;

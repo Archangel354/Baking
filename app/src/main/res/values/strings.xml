@@ -2,4 +2,5 @@
     <string name="app_name">Baking</string>
     <string name="empty_view_title_text">The recipe shelves are empty...</string>
     <string name="empty_view_subtitle_text">Get started by adding a recipe</string>
+    <string name="pb_amp_j_sandwich"><![CDATA[PB & J sandwich]]></string>
 </resources>
