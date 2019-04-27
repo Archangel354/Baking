@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.textclassifier.TextLinks;
+import android.widget.AdapterView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,7 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener {
 
     /** Adapter for the gridview of movies from the JSON data */
     private RecipeAdapter rAdapter;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
             }
         });
     }
+
 
     @Override
     public void onItemClick(int position) {

@@ -14,6 +14,16 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private Context rContext;
     private ArrayList<RecipeList> rRecipeList;
+    private OnItemClickListener rListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        rListener = listener;
+    }
+
 
     public RecipeAdapter(Context context, ArrayList<RecipeList> recipeList) {
         rContext = context;
@@ -22,14 +32,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
 
     @Override
-    public RecipeViewHolder onCreateViewHolder( ViewGroup parent, int i) {
+    public RecipeViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(rContext).inflate(R.layout.recipe, parent,false);
         return new RecipeViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeViewHolder recipeViewHolder, int i) {
+    public void onBindViewHolder(RecipeViewHolder holder, int position) {
+        RecipeList currentRecipe = rRecipeList.get(position);
 
+        String recipeName = currentRecipe.getName();
+        String recipeServings = currentRecipe.getServings();
+        String recipeImage = currentRecipe.getImage();
+
+        holder.rName.setText(recipeName);
+        holder.rServings.setText(recipeServings);
+        holder.rName.setText(recipeImage);
     }
 
     @Override
