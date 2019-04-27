@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener {
 
     /** Adapter for the gridview of movies from the JSON data */
+    private RecyclerView rRecyclerView;
     private RecipeAdapter rAdapter;
     public final static String RECIPESTRING = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    private RecyclerView rRecyclerView;
     private ArrayList<RecipeList> rRecipeList;
     private RequestQueue rRequestQueue;
 
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         rRecyclerView =  findViewById(R.id.recycler_view);
         rRecyclerView.setHasFixedSize(true);
         rRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
     private void parseJSON() {
         String url = RECIPESTRING;
+        //JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                 error.printStackTrace();
             }
         });
+
+        rRequestQueue.add(request);
     }
 
 
