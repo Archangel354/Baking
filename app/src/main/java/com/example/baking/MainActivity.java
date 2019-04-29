@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -55,21 +56,25 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private void parseJSON() {
         String url = RECIPESTRING;
         //JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
 
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("name");
-                            Log.i("LOG MainActicity", "parseJSON: " + jsonArray);
+                            //JSONObject jsonObject = response.getJSONObject("name");
+                            Log.i("LOG MainActivity", "parseJSON: " + response);
 
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject recipeName = jsonArray.getJSONObject(i);
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject recipeName = response.getJSONObject(i);
 
                                 String rName = recipeName.getString("name");
                                 String rServings = recipeName.getString("servings");
                                 String rImage = recipeName.getString("image");
+                                Log.i("LOG MainActivity", "rName: " + rName);
+                                Log.i("LOG MainActivity", "rServings: " + rServings);
+                                Log.i("LOG MainActivity", "rImage: " + rImage);
+
 
                                 rRecipeList.add(new RecipeList(rName, rServings, rImage));
                             }
