@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         String recipeName = currentRecipe.getName();
         String recipeServings = currentRecipe.getServings();
         String recipeImage = currentRecipe.getImage();
+        Log.i("LOG RecipeAdapter", "recipeName: " + recipeName);
+        Log.i("LOG RecipeAdapter", "recipeServings: " + recipeServings);
+        Log.i("LOG RecipeAdapter", "recipeImage: " + recipeImage);
 
         holder.rName.setText(recipeName);
         holder.rServings.setText(recipeServings);
