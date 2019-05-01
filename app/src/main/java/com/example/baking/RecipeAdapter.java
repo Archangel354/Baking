@@ -51,7 +51,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.rName.setText(recipeName);
         holder.rServings.setText(recipeServings);
-        holder.rName.setText(recipeImage);
+        holder.rImage.setText(recipeImage);
     }
 
     @Override
