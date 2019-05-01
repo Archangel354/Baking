@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                             }
 
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
+                            //rRecyclerView.setAdapter(null);
                             rRecyclerView.setAdapter(rAdapter);
-                            rAdapter.setOnItemClickListener(MainActivity.this);
+                            //rAdapter.setOnItemClickListener(MainActivity.this);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

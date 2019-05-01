@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private Context rContext;
-    private ArrayList<RecipeList> rRecipeList;
+    public static ArrayList<RecipeList> rRecipeList;
     private OnItemClickListener rListener;
 
     public interface OnItemClickListener {
@@ -38,7 +39,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
         RecipeList currentRecipe = rRecipeList.get(position);
 
         String recipeName = currentRecipe.getName();
@@ -47,7 +48,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.rName.setText(recipeName);
         holder.rServings.setText(recipeServings);
-        holder.rName.setText(recipeImage);
+        holder.rImage.setText(recipeImage);
+
+        Log.i("LOG RecipeAdapter", "recipeName: " + recipeName);
+        Log.i("LOG RecipeAdapter", "recipeServings: " + recipeServings);
+        Log.i("LOG RecipeAdapter", "recipeImage: " + recipeImage);
     }
 
     @Override
@@ -60,7 +65,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         public TextView rServings;
         public TextView rImage;
 
-        public RecipeViewHolder(@NonNull View itemView) {
+        public RecipeViewHolder( View itemView) {
             super(itemView);
             rName = itemView.findViewById(R.id.txtRecipeName);
             rServings = itemView.findViewById(R.id.txtServings);
