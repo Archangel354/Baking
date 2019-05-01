@@ -45,17 +45,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
         parseJSON();
-
-
-        // Create a new adapter that takes an empty list of movies as input
-        //rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
-        // Set the adapter on the {@link GridView} so the list can be populated in the user interface
-        //rRecyclerView.setAdapter(rAdapter);
     }
 
     private void parseJSON() {
         String url = RECIPESTRING;
-        //JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
 
                 new Response.Listener<JSONArray>() {
