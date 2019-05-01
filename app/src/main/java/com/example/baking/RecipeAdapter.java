@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private Context rContext;
-    public static ArrayList<RecipeList> rRecipeList;
+    private ArrayList<RecipeList> rRecipeList;
     private OnItemClickListener rListener;
 
     public interface OnItemClickListener {
@@ -39,7 +39,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     @Override
-    public void onBindViewHolder(RecipeViewHolder holder, final int position) {
+    public void onBindViewHolder(RecipeViewHolder holder, int position) {
         RecipeList currentRecipe = rRecipeList.get(position);
 
         String recipeName = currentRecipe.getName();
@@ -52,10 +52,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.rName.setText(recipeName);
         holder.rServings.setText(recipeServings);
         holder.rImage.setText(recipeImage);
-
-        Log.i("LOG RecipeAdapter", "recipeName: " + recipeName);
-        Log.i("LOG RecipeAdapter", "recipeServings: " + recipeServings);
-        Log.i("LOG RecipeAdapter", "recipeImage: " + recipeImage);
     }
 
     @Override
@@ -68,7 +64,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         public TextView rServings;
         public TextView rImage;
 
-        public RecipeViewHolder( View itemView) {
+        public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
             rName = itemView.findViewById(R.id.txtRecipeName);
             rServings = itemView.findViewById(R.id.txtServings);
