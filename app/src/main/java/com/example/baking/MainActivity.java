@@ -62,6 +62,15 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 JSONObject recipeName = response.getJSONObject(i);
 
                                 String rName = recipeName.getString("name");
+
+                                JSONArray ingredientArray = recipeName.getJSONArray("ingredients");
+
+                                String ingredients = null;
+                                for (int j = 0; j < ingredientArray.length(); j++){
+                                    JSONObject ingredientsObject = ingredientArray.getJSONObject(j);
+                                    String ingredients = ingredients + ingredientsObject.toString();
+
+                                }
                                 String rServings = recipeName.getString("servings");
                                 String rImage = recipeName.getString("image");
                                 Log.i("LOG MainActivity", "rName: " + rName);
