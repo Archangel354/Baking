@@ -64,11 +64,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         public TextView rServings;
         public TextView rImage;
 
-        public RecipeViewHolder(@NonNull View itemView) {
+        public RecipeViewHolder(View itemView) {
             super(itemView);
             rName = itemView.findViewById(R.id.txtRecipeName);
             rServings = itemView.findViewById(R.id.txtServings);
             rImage = itemView.findViewById(R.id.txtImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (rListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            rListener.onItemClick(position);
+                            Log.i("LOG RecipeViewHolder", "position: " + position);
+
+                        }
+                    }
+                }
+            });
         }
     }
 

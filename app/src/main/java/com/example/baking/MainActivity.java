@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.textclassifier.TextLinks;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
     @Override
     public void onItemClick(int position) {
+        Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
 
     }
 }
