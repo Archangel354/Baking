@@ -69,10 +69,15 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
                                 for (int j = 0; j < ingredientArray.length(); j++){
                                     JSONObject ingredientsObject = ingredientArray.getJSONObject(j);
-                                    //ingredients = ingredients + "\n" + ingredientsObject.toString();
-                                    ingredients =  ingredientsObject.toString() + "\n";
 
-                                    Log.i("LOG MainActivity for lp", "ingredients: " + ingredients);
+                                    Double quantity = ingredientsObject.getDouble("quantity");
+                                    String measure = ingredientsObject.getString("measure");
+                                    String ingredient = ingredientsObject.getString("ingredient");
+
+                                    //ingredients = ingredients + "\n" + ingredientsObject.toString();
+                                    //ingredients =  ingredientsObject.toString() + "\n";
+
+                                    Log.i("LOG MainActivity for lp", quantity + " " + measure + "\t\t" + ingredient + "\n");
 
 
                                 }
