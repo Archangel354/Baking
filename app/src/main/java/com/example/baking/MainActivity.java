@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            String ingredients = null;
+
                             //JSONObject jsonObject = response.getJSONObject("name");
                             Log.i("LOG MainActivity", "parseJSON: " + response);
 
@@ -65,17 +67,20 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
                                 JSONArray ingredientArray = recipeName.getJSONArray("ingredients");
 
-                                String ingredients = null;
                                 for (int j = 0; j < ingredientArray.length(); j++){
                                     JSONObject ingredientsObject = ingredientArray.getJSONObject(j);
-                                    String ingredients = ingredients + ingredientsObject.toString();
+                                    //ingredients = ingredients + "\n" + ingredientsObject.toString();
+                                    ingredients =  ingredientsObject.toString() + "\n";
+
+                                    Log.i("LOG MainActivity for lp", "ingredients: " + ingredients);
+
 
                                 }
                                 String rServings = recipeName.getString("servings");
                                 String rImage = recipeName.getString("image");
                                 Log.i("LOG MainActivity", "rName: " + rName);
                                 Log.i("LOG MainActivity", "rServings: " + rServings);
-                                Log.i("LOG MainActivity", "rImage: " + rImage);
+                                Log.i("LOG MainActivity", "rImage: " + rImage + "\n");
 
 
                                 rRecipeList.add(new RecipeList(rName, rServings, rImage));
