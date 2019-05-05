@@ -66,33 +66,33 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 String rName = recipeName.getString("name");
 
                                 JSONArray ingredientArray = recipeName.getJSONArray("ingredients");
-
                                 for (int j = 0; j < ingredientArray.length(); j++){
                                     JSONObject ingredientsObject = ingredientArray.getJSONObject(j);
-
                                     Double quantity = ingredientsObject.getDouble("quantity");
                                     String measure = ingredientsObject.getString("measure");
                                     String ingredient = ingredientsObject.getString("ingredient");
-
-                                    //ingredients = ingredients + "\n" + ingredientsObject.toString();
-                                    //ingredients =  ingredientsObject.toString() + "\n";
-
                                     Log.i("LOG MainActivity for lp", quantity + " " + measure + "\t\t" + ingredient + "\n");
-
-
                                 }
+
+                                JSONArray stepsArray = recipeName.getJSONArray("steps");
+                                for (int k = 0; k < stepsArray.length(); k++){
+                                    JSONObject stepsObject = stepsArray.getJSONObject(k);
+                                    String shortDescription = stepsObject.getString("shortDescription");
+                                    String description = stepsObject.getString("description");
+                                    String videoURL = stepsObject.getString("videoURL");
+                                    String thumbnailURL = stepsObject.getString("thumbnailURL");
+                                    Log.i("LOG MainActivity for lp", shortDescription + " " + description + "\t" + videoURL + thumbnailURL + "\n");
+                                }
+
+
                                 String rServings = recipeName.getString("servings");
-                                String rImage = recipeName.getString("image");
+                                //String rImage = recipeName.getString("image");
                                 Log.i("LOG MainActivity", "rName: " + rName);
                                 Log.i("LOG MainActivity", "rServings: " + rServings);
-                                Log.i("LOG MainActivity", "rImage: " + rImage + "\n");
-
-
-                                rRecipeList.add(new RecipeList(rName, rServings, rImage));
+                                rRecipeList.add(new RecipeList(rName, rServings));
                             }
 
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
-                            //rRecyclerView.setAdapter(null);
                             rRecyclerView.setAdapter(rAdapter);
                             //rAdapter.setOnItemClickListener(MainActivity.this);
                         } catch (JSONException e) {

@@ -5,12 +5,14 @@ public class RecipeList {
     // items for a particular recipe
     private String rName;
     private String rServings;
-    private String rImage;
+   //private String rImage;
 
-    public RecipeList(String name, String servings, String image) {
-        rName = name;
+    //public RecipeList(String name, String servings, String image) {
+    public RecipeList(String name, String servings) {
+
+            rName = name;
         rServings = servings;
-        rImage = image;
+
     }
 
     public String getName() {
@@ -21,7 +23,7 @@ public class RecipeList {
         return rServings;
     }
 
-    public String getImage() {
-        return rImage;
-    }
+//    public String getImage() {
+//        return rImage;
+//    }
 }

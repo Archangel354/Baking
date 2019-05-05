@@ -44,14 +44,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         String recipeName = currentRecipe.getName();
         String recipeServings = currentRecipe.getServings();
-        String recipeImage = currentRecipe.getImage();
+        //String recipeImage = currentRecipe.getImage();
         Log.i("LOG RecipeAdapter", "recipeName: " + recipeName);
         Log.i("LOG RecipeAdapter", "recipeServings: " + recipeServings);
-        Log.i("LOG RecipeAdapter", "recipeImage: " + recipeImage);
+        //Log.i("LOG RecipeAdapter", "recipeImage: " + recipeImage);
 
         holder.rName.setText(recipeName);
         holder.rServings.setText(recipeServings);
-        holder.rImage.setText(recipeImage);
+        //holder.rImage.setText(recipeImage);
     }
 
     @Override
