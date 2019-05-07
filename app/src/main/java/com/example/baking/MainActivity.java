@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.baking.models.BakingModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                             Log.i("LOG MainActivity", "parseJSON: " + response);
 
                             for (int i = 0; i < response.length(); i++) {
+                                BakingModel bakingModel = new BakingModel();
+                                bakingModel.setRecipeName();
                                 JSONObject recipeName = response.getJSONObject(i);
 
                                 String rName = recipeName.getString("name");
