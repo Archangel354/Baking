@@ -1,5 +1,6 @@
 package com.example.baking;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -115,13 +116,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     public void onItemClick(int position) {
                Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
                Log.i("OnClick", "MainActivity");
-
+        Intent detailIntent = new Intent(this, DetailActivity.class);
+        startActivity(detailIntent);
 
     }
-
-
-//    @Override
-//    public void onItemClick(int position) {
-//        Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
-//    }
 }
