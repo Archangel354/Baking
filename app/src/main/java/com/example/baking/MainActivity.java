@@ -14,7 +14,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -46,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
         parseJSON();
+        Log.i("MainActivity", "END OF APP;onCreate");
+
     }
 
     private void parseJSON() {
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
                             rRecyclerView.setAdapter(rAdapter);
-                            //rAdapter.setOnItemClickListener(MainActivity.this);
+                            rAdapter.setOnItemClickListener(MainActivity.this);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -110,10 +111,17 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         rRequestQueue.add(request);
     }
 
-
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
+               Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
+               Log.i("OnClick", "MainActivity");
+
 
     }
+
+
+//    @Override
+//    public void onItemClick(int position) {
+//        Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
+//    }
 }
