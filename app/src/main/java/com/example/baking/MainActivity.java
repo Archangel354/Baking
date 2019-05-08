@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.textclassifier.TextLinks;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener {
 
@@ -64,15 +63,21 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 BakingModel bakingModel = new BakingModel();
                                 bakingModel.setRecipeName(recipeName.getString("name"));
 
+                                List<String> ingredientsList = new ArrayList<>();
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
                                     JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
                                     BakingModel.Ingredients ingredients = new BakingModel.Ingredients();
                                     ingredients.setQuantity(ingredientsObject.getDouble("quantity"));
                                     ingredients.setMeasure(ingredientsObject.getString("measure"));
                                     ingredients.setIngredient(ingredientsObject.getString("ingredient"));//
-                                    Log.i("LOG MainActivity for lp", ingredients.getQuantity() + " " +
+                                    //Log.i("LOG MainActivity for lp", ingredients.getQuantity() + " " +
+                                    //        ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
+
+                                    ingredientsList.add(ingredients.getQuantity() + " " +
                                             ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
                                 }
+                                Log.i("LOG ingredientsList: ", String.format("\n" + ingredientsList));
+
 
                                 for (int k = 0; k < recipeName.getJSONArray("steps").length(); k++){
                                     JSONObject stepsObject = recipeName.getJSONArray("steps").getJSONObject(k);
@@ -90,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 Log.i("LOG MainActivity", "rServings: " + rServings);
                                 rRecipeList.add(new RecipeList(bakingModel.getRecipeName(), rServings));
                             }
-
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
                             rRecyclerView.setAdapter(rAdapter);
                             rAdapter.setOnItemClickListener(MainActivity.this);
