@@ -59,43 +59,51 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            String ingredients = null;
+                            //String ingredients = null;
 
                             //JSONObject jsonObject = response.getJSONObject("name");
                             Log.i("LOG MainActivity", "parseJSON: " + response);
 
                             for (int i = 0; i < response.length(); i++) {
-                                BakingModel bakingModel = new BakingModel();
-                                bakingModel.setRecipeName();
                                 JSONObject recipeName = response.getJSONObject(i);
-
-                                String rName = recipeName.getString("name");
-
-                                JSONArray ingredientArray = recipeName.getJSONArray("ingredients");
-                                for (int j = 0; j < ingredientArray.length(); j++){
-                                    JSONObject ingredientsObject = ingredientArray.getJSONObject(j);
-                                    Double quantity = ingredientsObject.getDouble("quantity");
-                                    String measure = ingredientsObject.getString("measure");
-                                    String ingredient = ingredientsObject.getString("ingredient");
-                                    Log.i("LOG MainActivity for lp", quantity + " " + measure + "\t\t" + ingredient + "\n");
+                                BakingModel bakingModel = new BakingModel();
+                                bakingModel.setRecipeName(recipeName.getString("name"));
+                                //String rName = recipeName.getString("name");
+                                //JSONArray ingredientArray = recipeName.getJSONArray("ingredients");
+                                for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
+                                    JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
+                                    BakingModel.Ingredients ingredients = new BakingModel.Ingredients();
+                                    ingredients.setQuantity(ingredientsObject.getDouble("quantity"));
+                                    ingredients.setMeasure(ingredientsObject.getString("measure"));
+                                    ingredients.setIngredient(ingredientsObject.getString("ingredient"));//
+//                                    Double quantity = ingredientsObject.getDouble("quantity");
+//                                    String measure = ingredientsObject.getString("measure");
+//                                    String ingredient = ingredientsObject.getString("ingredient");
+                                    Log.i("LOG MainActivity for lp", ingredients.getQuantity() + " " +
+                                            ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
                                 }
 
-                                JSONArray stepsArray = recipeName.getJSONArray("steps");
-                                for (int k = 0; k < stepsArray.length(); k++){
-                                    JSONObject stepsObject = stepsArray.getJSONObject(k);
-                                    String shortDescription = stepsObject.getString("shortDescription");
-                                    String description = stepsObject.getString("description");
-                                    String videoURL = stepsObject.getString("videoURL");
-                                    String thumbnailURL = stepsObject.getString("thumbnailURL");
-                                    Log.i("LOG MainActivity for lp", shortDescription + " " + description + "\t" + videoURL + thumbnailURL + "\n");
+                                //JSONArray stepsArray = recipeName.getJSONArray("steps");
+                                for (int k = 0; k < recipeName.getJSONArray("steps").length(); k++){
+                                    JSONObject stepsObject = recipeName.getJSONArray("steps").getJSONObject(k);
+                                    BakingModel.Steps steps = new BakingModel.Steps();
+                                    steps.setShortDescription(stepsObject.getString("shortDescription"));
+                                    steps.setDescription(stepsObject.getString("description"));
+                                    steps.setVideoURL(stepsObject.getString("videoURL"));
+                                    steps.setThumbnailURL(stepsObject.getString("thumbnailURL"));
+                                    //String shortDescription = stepsObject.getString("shortDescription");
+                                    //String description = stepsObject.getString("description");
+                                    //String videoURL = stepsObject.getString("videoURL");
+                                    //String thumbnailURL = stepsObject.getString("thumbnailURL");
+                                    Log.i("LOG MainActivity for lp", steps.getShortDescription() + " "
+                                            + steps.getDescription() + "\t" + steps.getVideoURL() + steps.getThumbnailURL() + "\n");
                                 }
-
 
                                 String rServings = recipeName.getString("servings");
                                 //String rImage = recipeName.getString("image");
-                                Log.i("LOG MainActivity", "rName: " + rName);
+                                Log.i("LOG MainActivity", "recipeName: " + bakingModel.getRecipeName());
                                 Log.i("LOG MainActivity", "rServings: " + rServings);
-                                rRecipeList.add(new RecipeList(rName, rServings));
+                                rRecipeList.add(new RecipeList(bakingModel.getRecipeName(), rServings));
                             }
 
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);

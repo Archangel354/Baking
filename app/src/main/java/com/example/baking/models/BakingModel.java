@@ -42,15 +42,15 @@ public class BakingModel {
     }
 
     public static class Ingredients {
-        private float quantity;
+        private double quantity;
         private String measure;
         private String ingredient;
 
-        public float getQuantity() {
+        public double getQuantity() {
             return quantity;
         }
 
-        public void setQuantity(float quantity) {
+        public void setQuantity(double quantity) {
             this.quantity = quantity;
         }
 
@@ -75,6 +75,8 @@ public class BakingModel {
         private String shortDescription;
         private String description;
         private String videoURL;
+        private String thumbnailURL;
+
 
         public String getShortDescription() {
             return shortDescription;
@@ -98,6 +100,14 @@ public class BakingModel {
 
         public void setVideoURL(String videoURL) {
             this.videoURL = videoURL;
+        }
+
+        public String getThumbnailURL() {
+            return thumbnailURL;
+        }
+
+        public void setThumbnailURL(String thumbnailURL) {
+            this.thumbnailURL = thumbnailURL;
         }
     }
 
