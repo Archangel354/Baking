@@ -58,12 +58,14 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+
+                            List<BakingModel> bakingModelList = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject recipeName = response.getJSONObject(i);
                                 BakingModel bakingModel = new BakingModel();
                                 bakingModel.setRecipeName(recipeName.getString("name"));
 
-                                List<String> ingredientsList = new ArrayList<>();
+                                final List<String> ingredientsList = new ArrayList<>();
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
                                     JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
                                     BakingModel.Ingredients ingredients = new BakingModel.Ingredients();
@@ -73,10 +75,11 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     //Log.i("LOG MainActivity for lp", ingredients.getQuantity() + " " +
                                     //        ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
 
-                                    ingredientsList.add(ingredients.getQuantity() + " " +
+                                    ingredientsList.add( ingredients.getQuantity() + " " +
                                             ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
                                 }
-                                Log.i("LOG ingredientsList: ", String.format("\n" + ingredientsList));
+                                Log.i("LOG ingredientsList: ",  ingredientsList.toString());
+                                bakingModel.setIngredientsList(ingredientsList);
 
 
                                 for (int k = 0; k < recipeName.getJSONArray("steps").length(); k++){
@@ -94,7 +97,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 Log.i("LOG MainActivity", "recipeName: " + bakingModel.getRecipeName());
                                 Log.i("LOG MainActivity", "rServings: " + rServings);
                                 rRecipeList.add(new RecipeList(bakingModel.getRecipeName(), rServings));
+                                // adding the final object in the list
+                                bakingModelList.add(bakingModel);
                             }
+
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
                             rRecyclerView.setAdapter(rAdapter);
                             rAdapter.setOnItemClickListener(MainActivity.this);
@@ -116,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
                Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
+        Bundle rBundle = new Bundle();
+
         startActivity(detailIntent);
 
     }
