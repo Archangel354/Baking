@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     public final static String RECIPESTRING = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     private ArrayList<RecipeList> rRecipeList;
     private RequestQueue rRequestQueue;
+    private ArrayList<BakingModel> bakingModelList;
 
 
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bakingModelList = new ArrayList<>();
 
         rRecyclerView =  findViewById(R.id.recycler_view);
         rRecyclerView.setHasFixedSize(true);
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                     public void onResponse(JSONArray response) {
                         try {
 
-                            List<BakingModel> bakingModelList = new ArrayList<>();
+                            //List<BakingModel> bakingModelList = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject recipeName = response.getJSONObject(i);
                                 BakingModel bakingModel = new BakingModel();
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
                Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
+        BakingModel clickedItem = baking
+
         Bundle rBundle = new Bundle();
 
         startActivity(detailIntent);
