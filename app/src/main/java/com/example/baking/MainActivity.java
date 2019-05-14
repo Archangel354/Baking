@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
     @Override
     public void onItemClick(int position) {
-               Toast.makeText(MainActivity.this,"Card pressed", Toast.LENGTH_SHORT).show();
+               Toast.makeText(MainActivity.this,"Position: " + position, Toast.LENGTH_SHORT).show();
                Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
         //BakingModel clickedItem = baking
