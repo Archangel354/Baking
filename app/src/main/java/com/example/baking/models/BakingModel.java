@@ -6,7 +6,7 @@ public class BakingModel {
 
     private String recipeName;
     private int servings;
-    private List<String> ingredientsList;
+    private String ingredientsList;
     private List<Steps> stepsList;
 
     public String getRecipeName() {
@@ -25,11 +25,11 @@ public class BakingModel {
         this.servings = servings;
     }
 
-    public List<String> getIngredientsList() {
+    public String getIngredientsList() {
         return ingredientsList;
     }
 
-    public void setIngredientsList(List<String> ingredientsList) {
+    public void setIngredientsList(String ingredientsList) {
         this.ingredientsList = ingredientsList;
     }
 
