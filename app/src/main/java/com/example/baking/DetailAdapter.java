@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.baking.R;
 import com.example.baking.models.BakingModel;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -18,11 +21,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
         public TextView dTextIngredients;
-        public ArrayList<BakingModel.Steps> dStepsList;
+        public TextView dTextStep;
 
         public DetailViewHolder(@NonNull View itemView) {
             super(itemView);
-            dTextIngredients =
+            dTextIngredients = itemView.findViewById(R.id.txtIngredients);
+            dTextStep = itemView.findViewById(R.id.rvSteps);
         }
     }
 
