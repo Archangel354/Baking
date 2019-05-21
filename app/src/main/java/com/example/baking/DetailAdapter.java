@@ -1,4 +1,4 @@
-spackage com.example.baking;
+package com.example.baking;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,8 +16,30 @@ import java.util.ArrayList;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailViewHolder> {
     private Context dContext;
-    //private ArrayList<ExampleItem> mExampleList;
+    private ArrayList<BakingModel> mExampleList;
    // private OnItemClickListener mListener;
+
+
+    public DetailAdapter(Context context, ArrayList<BakingModel> exampleList) {
+        dContext = context;
+        mExampleList = exampleList;
+    }
+
+    @NonNull
+    @Override
+    public DetailViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull DetailViewHolder detailViewHolder, int i) {
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
         public TextView dTextIngredients;
@@ -28,23 +50,5 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
             dTextIngredients = itemView.findViewById(R.id.txtIngredients);
             dTextStep = itemView.findViewById(R.id.rvSteps);
         }
-    }
-
-
-
-    @NonNull
-    @Override
-    public DetailAdapter onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull DetailAdapter detailAdapter, int i) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
     }
 }
