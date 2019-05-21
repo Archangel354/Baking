@@ -14,6 +14,7 @@ import com.example.baking.models.BakingModel;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailViewHolder> {
     private Context dContext;
@@ -38,6 +39,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
         BakingModel currentItem = mExampleList.get(position);
 
         String ingredients = currentItem.getIngredientsList();
+        List steps = currentItem.getStepsList();
 
 
 
