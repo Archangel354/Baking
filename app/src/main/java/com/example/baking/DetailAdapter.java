@@ -41,6 +41,9 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
         String ingredients = currentItem.getIngredientsList();
         List steps = currentItem.getStepsList();
 
+        detailViewHolder.dTextIngredients.setText(ingredients);
+        //detailViewHolder.dTextStep.List(steps);
+
 
 
     }

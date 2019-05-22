@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 BakingModel bakingModel = new BakingModel();
                                 bakingModel.setRecipeName(recipeName.getString("name"));
 
-                                final List<String> ingredientsList = new ArrayList<>();
+                                //final List<String> ingredientsList = new ArrayList<>();
+                                 String ingredientsList = null;
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
                                     JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
                                     BakingModel.Ingredients ingredients = new BakingModel.Ingredients();
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     //Log.i("LOG MainActivity for lp", ingredients.getQuantity() + " " +
                                     //        ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
 
-                                    ingredientsList.add( ingredients.getQuantity() + " " +
+                                    ingredientsList +=( ingredients.getQuantity() + " " +
                                             ingredients.getMeasure() + "\t\t" + ingredients.getIngredient() + "\n");
                                 }
                                 Log.i("LOG ingredientsList: ",  ingredientsList.toString());
