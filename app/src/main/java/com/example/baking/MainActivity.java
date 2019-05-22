@@ -120,16 +120,5 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         rRequestQueue.add(request);
     }
 
-    @Override
-    public void onItemClick(int position) {
-               Toast.makeText(MainActivity.this,"Position: " + position, Toast.LENGTH_SHORT).show();
-               Log.i("OnClick", "MainActivity");
-        Intent detailIntent = new Intent(this, DetailActivity.class);
-        //BakingModel clickedItem = baking
 
-        Bundle rBundle = new Bundle();
-
-        startActivity(detailIntent);
-
-    }
 }
