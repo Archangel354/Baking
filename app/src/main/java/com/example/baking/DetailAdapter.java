@@ -16,6 +16,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailViewHolder> {
     private Context dContext;
     private ArrayList<BakingModel> mExampleList;
@@ -46,6 +47,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
 
 
 
+
     }
 
     @Override
@@ -60,7 +62,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
         public DetailViewHolder(@NonNull View itemView) {
             super(itemView);
             dTextIngredients = itemView.findViewById(R.id.txtIngredients);
-            dTextStep = itemView.findViewById(R.id.rvSteps);
+            //dTextStep = itemView.findViewById(R.id.rvSteps);
         }
     }
 }

@@ -120,5 +120,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         rRequestQueue.add(request);
     }
 
+    @Override
+    public void onItemClick(int position) {
 
+    }
 }
