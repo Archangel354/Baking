@@ -123,5 +123,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     @Override
     public void onItemClick(int position) {
 
+        Toast.makeText(MainActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
+        Log.i("OnClick", "MainActivity");
+
     }
 }
