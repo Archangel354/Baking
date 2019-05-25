@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
         Toast.makeText(MainActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
         Log.i("OnClick", "MainActivity");
-
+        Intent detailIntent = new Intent(this, DetailActivity.class);
+        startActivity(detailIntent);
     }
 }
