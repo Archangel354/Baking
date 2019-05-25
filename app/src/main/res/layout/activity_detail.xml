@@ -11,6 +11,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/txtIngredientsHeader"
+        android:text="List of Ingredients"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="16dp"
+        android:textAlignment="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtIngredientsHeader"
         android:id="@+id/txtIngredientsList"
         android:text="@string/ingredients_list"/>
 

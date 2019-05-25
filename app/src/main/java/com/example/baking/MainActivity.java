@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 bakingModel.setRecipeName(recipeName.getString("name"));
 
                                 //final List<String> ingredientsList = new ArrayList<>();
-                                 String ingredientsList = null;
+                                 String ingredientsList = "";
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
                                     JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
                                     BakingModel.Ingredients ingredients = new BakingModel.Ingredients();
