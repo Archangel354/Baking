@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private ArrayList<RecipeList> rRecipeList;
     private RequestQueue rRequestQueue;
     private ArrayList<BakingModel> bakingModelList;
+    public static final String EXTRA_INGREDIENTS = "ingredients";
+
 
 
 
@@ -126,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         Toast.makeText(MainActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
         Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
-        startActivity(detailIntent);
+        BakingModel clickedItem = bakingModelList.get(position);
+        detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
+                startActivity(detailIntent);
     }
 }
