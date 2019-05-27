@@ -129,6 +129,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
         BakingModel clickedItem = bakingModelList.get(position);
+
+
+
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
                 startActivity(detailIntent);
     }

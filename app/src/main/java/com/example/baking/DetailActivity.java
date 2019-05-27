@@ -30,8 +30,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         dRecyclerView =  findViewById(R.id.recyclerDetail_view);
         // Create a new adapter that takes an empty list of movies as input
-        dStepsList =
-        dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
+//        dStepsList =
+//        dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
         dRecyclerView.setHasFixedSize(true);
         dRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
 
