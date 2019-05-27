@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private ArrayList<BakingModel.Steps> stepsArrayList;
 
     public static final String EXTRA_INGREDIENTS = "ingredients";
+    public static final String EXTRA_STEPS = "steps";
+
 
 
 
@@ -138,8 +140,12 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
 
         Log.i("OnClick", "steps " + stepsItem.getDescription());
+        Log.i("OnClick", "stepsArrayList:\n " +stepsArrayList);
+
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-                startActivity(detailIntent);
+        detailIntent.putExtra(EXTRA_STEPS, stepsArrayList);
+
+        startActivity(detailIntent);
     }
 }

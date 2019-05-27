@@ -13,6 +13,7 @@ import com.example.baking.models.BakingModel;
 import java.util.ArrayList;
 
 import static com.example.baking.MainActivity.EXTRA_INGREDIENTS;
+import static com.example.baking.MainActivity.EXTRA_STEPS;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -40,6 +41,8 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
+        String steps = intent.getStringExtra(EXTRA_STEPS);
+
 
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
         textIngredients.setText(ingredients);

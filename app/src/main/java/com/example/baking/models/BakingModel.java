@@ -1,5 +1,6 @@
 package com.example.baking.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class BakingModel {
@@ -71,7 +72,7 @@ public class BakingModel {
         }
     }
 
-    public static class Steps {
+    public static class Steps implements Serializable {
         private String shortDescription;
         private String description;
         private String videoURL;
