@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private ArrayList<RecipeList> rRecipeList;
     private RequestQueue rRequestQueue;
     private ArrayList<BakingModel> bakingModelList;
+    private ArrayList<BakingModel.Steps> stepsArrayList;
+
     public static final String EXTRA_INGREDIENTS = "ingredients";
 
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bakingModelList = new ArrayList<>();
+        stepsArrayList = new ArrayList<>();
+
 
         rRecyclerView =  findViewById(R.id.recycler_view);
         rRecyclerView.setHasFixedSize(true);
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     steps.setThumbnailURL(stepsObject.getString("thumbnailURL"));
                                     Log.i("LOG MainActivity for lp", steps.getShortDescription() + " "
                                             + steps.getDescription() + "\t" + steps.getVideoURL() + steps.getThumbnailURL() + "\n");
+                                    stepsArrayList.add(steps);
                                 }
 
                                 String rServings = recipeName.getString("servings");
@@ -129,8 +134,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
         BakingModel clickedItem = bakingModelList.get(position);
+        BakingModel.Steps stepsItem = stepsArrayList.get(position);
 
 
+        Log.i("OnClick", "steps " + stepsItem.getDescription());
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
                 startActivity(detailIntent);
