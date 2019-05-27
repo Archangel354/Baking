@@ -30,18 +30,19 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         dRecyclerView =  findViewById(R.id.recyclerDetail_view);
+        Intent intent = getIntent();
+        String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
+        ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
         // Create a new adapter that takes an empty list of movies as input
-//        dStepsList =
-//        dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
+        dStepsList = steps;
+        dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
         dRecyclerView.setHasFixedSize(true);
         dRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
 
         // Set the adapter on the {@link GridView} so the list can be populated in the user interface
         dRecyclerView.setAdapter(dAdapter);
 
-        Intent intent = getIntent();
-        String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
-        ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
+
 
 
         TextView textIngredients = findViewById(R.id.txtIngredientsList);

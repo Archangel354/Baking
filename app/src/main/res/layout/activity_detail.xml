@@ -19,6 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ingredients_leftmargin"
         android:layout_below="@id/txtIngredientsHeader"
         android:id="@+id/txtIngredientsList"
         android:text="@string/ingredients_list"/>
