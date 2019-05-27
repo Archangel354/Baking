@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
-        String steps = intent.getStringExtra(EXTRA_STEPS);
+        ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
 
 
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
