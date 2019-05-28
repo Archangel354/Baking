@@ -28,7 +28,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     @NonNull
     @Override
     public DetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View v = LayoutInflater.from(dContext).inflate(R.layout.ingredients_steps_item, parent, false);
+        View v = LayoutInflater.from(dContext).inflate(R.layout.step_item, parent, false);
         return new DetailViewHolder(v);
     }
 
