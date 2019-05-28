@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 JSONObject recipeName = response.getJSONObject(i);
                                 BakingModel bakingModel = new BakingModel();
                                 bakingModel.setRecipeName(recipeName.getString("name"));
+                                stepsArrayList.clear();
+
+
 
                                 //final List<String> ingredientsList = new ArrayList<>();
                                  String ingredientsList = "";
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                             + steps.getDescription() + "\t" + steps.getVideoURL() + steps.getThumbnailURL() + "\n");
                                     stepsArrayList.add(steps);
                                 }
+                                bakingModel.setStepsList(stepsArrayList);
+
 
                                 String rServings = recipeName.getString("servings");
                                 Log.i("LOG MainActivity", "recipeName: " + bakingModel.getRecipeName());
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 // adding the final object in the list
                                 bakingModelList.add(bakingModel);
                             }
+
 
                             rAdapter = new RecipeAdapter(MainActivity.this, rRecipeList);
                             rRecyclerView.setAdapter(rAdapter);
@@ -140,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
 
         Log.i("OnClick", "steps " + stepsItem.getDescription());
-        Log.i("OnClick", "stepsArrayList:\n " +stepsArrayList);
+        Log.i("OnClick", "stepsArrayList size:\n " +stepsArrayList.size());
 
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());

@@ -33,7 +33,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     public void onBindViewHolder(@NonNull DetailViewHolder detailViewHolder,  int position) {
         BakingModel.Steps currentItem = dStepList.get(position);
 
-        final String step = currentItem.getDescription();
+       String step = currentItem.getDescription();
         //List steps = currentItem.getStepsList();
 
         detailViewHolder.dTextViewDescrition.setText(step);
