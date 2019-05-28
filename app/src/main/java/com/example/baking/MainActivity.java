@@ -103,11 +103,13 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     steps.setDescription(stepsObject.getString("description"));
                                     steps.setVideoURL(stepsObject.getString("videoURL"));
                                     steps.setThumbnailURL(stepsObject.getString("thumbnailURL"));
-                                    Log.i("LOG MainActivity for lp", steps.getShortDescription() + " "
-                                            + steps.getDescription() + "\t" + steps.getVideoURL() + steps.getThumbnailURL() + "\n");
+                                    //Log.i("LOG MainActivity for lp", steps.getShortDescription() + " "
+                                    //        + steps.getDescription() + "\t" + steps.getVideoURL() + steps.getThumbnailURL() + "\n");
                                     stepsArrayList.add(steps);
                                 }
                                 bakingModel.setStepsList(stepsArrayList);
+                                Log.i("LOG MainActivity", "stepsArrayList: " + bakingModel.getStepsList());
+
 
 
                                 String rServings = recipeName.getString("servings");
