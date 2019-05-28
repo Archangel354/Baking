@@ -153,12 +153,12 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
 
 
-        Log.i("OnClick", "steps " + stepsItem.getDescription());
-        Log.i("OnClick", "stepsArrayList size:\n " +stepsArrayList2.size());
+        Log.i("OnClick", "steps " + clickedItem.getStepsList());
+        Log.i("OnClick", "ingredientsList:\n " + clickedItem.getIngredientsList());
 
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-        detailIntent.putExtra(EXTRA_STEPS, stepsArrayList2);
+        detailIntent.putExtra(EXTRA_STEPS, clickedItem.getStepsList());
 
         startActivity(detailIntent);
     }
