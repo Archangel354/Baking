@@ -11,18 +11,15 @@ import android.widget.TextView;
 import com.example.baking.models.BakingModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailViewHolder> {
     private Context dContext;
-    private ArrayList<BakingModel.Steps> mStepList;
-    //private RecyclerView dRecyclerView;
-    // private OnItemClickListener mListener;
+    private ArrayList<BakingModel.Steps> dStepList;
 
 
     public DetailAdapter(Context context, ArrayList<BakingModel.Steps> stepList) {
         dContext = context;
-        mStepList = stepList;
+        dStepList = stepList;
     }
 
     @NonNull
@@ -33,29 +30,29 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DetailViewHolder detailViewHolder, int position) {
-        BakingModel.Steps currentItem = mStepList.get(position);
+    public void onBindViewHolder(@NonNull DetailViewHolder detailViewHolder,  int position) {
+        BakingModel.Steps currentItem = dStepList.get(position);
 
-        String ingredients = currentItem.getShortDescription();
+        final String step = currentItem.getDescription();
         //List steps = currentItem.getStepsList();
 
-        //detailViewHolder.dTextStep.setText(ingredients);
+        detailViewHolder.dTextViewDescrition.setText(step);
         //detailViewHolder.dTextStep.List(steps);
     }
 
     @Override
     public int getItemCount() {
-        return mStepList.size();
+        return dStepList.size();
     }
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
         //public TextView dTextIngredients;
-        public TextView dTextStep;
+        public TextView dTextViewDescrition;
 
         public DetailViewHolder(@NonNull View itemView) {
             super(itemView);
             //dTextIngredients = itemView.findViewById(R.id.txtIngredients);
-            dTextStep = itemView.findViewById(R.id.txtStep);
+            dTextViewDescrition = itemView.findViewById(R.id.txtStep);
         }
     }
 }
