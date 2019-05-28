@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private RequestQueue rRequestQueue;
     private ArrayList<BakingModel> bakingModelList;
     private ArrayList<BakingModel.Steps> stepsArrayList;
+    private ArrayList<BakingModel.Steps> stepsArrayList2;
+
 
     public static final String EXTRA_INGREDIENTS = "ingredients";
     public static final String EXTRA_STEPS = "steps";
-
-
-
+    private BakingModel onCreateBakingModel;
 
 
     @Override
@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         bakingModelList = new ArrayList<>();
         stepsArrayList = new ArrayList<>();
 
+        onCreateBakingModel = new BakingModel();
+
 
         rRecyclerView =  findViewById(R.id.recycler_view);
         rRecyclerView.setHasFixedSize(true);
@@ -55,12 +57,12 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
-        parseJSON();
+        onCreateBakingModel = parseJSON(onCreateBakingModel);
         Log.i("MainActivity", "END OF APP;onCreate");
 
     }
 
-    private void parseJSON() {
+    private BakingModel parseJSON(final BakingModel bakingModel) {
         String url = RECIPESTRING;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
 
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                             //List<BakingModel> bakingModelList = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject recipeName = response.getJSONObject(i);
-                                BakingModel bakingModel = new BakingModel();
+
                                 bakingModel.setRecipeName(recipeName.getString("name"));
                                 stepsArrayList.clear();
 
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     stepsArrayList.add(steps);
                                 }
                                 bakingModel.setStepsList(stepsArrayList);
-                                Log.i("LOG MainActivity", "stepsArrayList: " + bakingModel.getStepsList());
+                                Log.i("LOG MainActivity", "getStepList: " + bakingModel.getStepsList());
 
 
 
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
             }
         });
         rRequestQueue.add(request);
+        return bakingModel;
     }
 
     @Override
@@ -146,13 +149,16 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         BakingModel clickedItem = bakingModelList.get(position);
         BakingModel.Steps stepsItem = stepsArrayList.get(position);
 
+        stepsArrayList2 = onCreateBakingModel.getStepsList();
+
+
 
         Log.i("OnClick", "steps " + stepsItem.getDescription());
-        Log.i("OnClick", "stepsArrayList size:\n " +stepsArrayList.size());
+        Log.i("OnClick", "stepsArrayList size:\n " +stepsArrayList2.size());
 
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-        detailIntent.putExtra(EXTRA_STEPS, stepsArrayList);
+        detailIntent.putExtra(EXTRA_STEPS, stepsArrayList2);
 
         startActivity(detailIntent);
     }
