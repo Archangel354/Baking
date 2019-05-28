@@ -1,6 +1,7 @@
 package com.example.baking;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
 
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-        detailIntent.putExtra(EXTRA_STEPS, stepsArrayList);
+        detailIntent.putExtra(EXTRA_STEPS, (Serializable) clickedItem.getStepsList());
 
         startActivity(detailIntent);
     }
