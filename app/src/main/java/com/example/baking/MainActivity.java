@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 bakingModel.setRecipeName(recipeName.getString("name"));
                                 stepsArrayList.clear();
 
-
-
                                 //final List<String> ingredientsList = new ArrayList<>();
                                  String ingredientsList = "";
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
