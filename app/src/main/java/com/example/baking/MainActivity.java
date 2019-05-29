@@ -146,15 +146,15 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         Log.i("OnClick", "MainActivity");
         Intent detailIntent = new Intent(this, DetailActivity.class);
         BakingModel clickedItem = bakingModelList.get(position);
-        BakingModel.Steps stepsItem = stepsArrayList.get(position);
+        BakingModel stepsItem = bakingModelList.get(position);
 
 
-        Log.i("OnClick", "steps " + stepsItem.getDescription());
-        Log.i("OnClick", "stepsArrayList size:\n " +stepsArrayList.size());
+        Log.i("OnClick", "ingredients " + clickedItem.getIngredientsList());
+        Log.i("OnClick", "getStepsList:\n " + stepsItem.getStepsList());
 
 
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-        detailIntent.putExtra(EXTRA_STEPS, (Serializable) clickedItem.getStepsList());
+        detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList());
 
         startActivity(detailIntent);
     }
