@@ -1,14 +1,14 @@
 package com.example.baking.models;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class BakingModel {
 
     private String recipeName;
     private int servings;
     private String ingredientsList;
-    private List<Steps> stepsList;
+    private ArrayList<ArrayList<Steps>> stepsList;
 
     public String getRecipeName() {
         return recipeName;
@@ -34,11 +34,11 @@ public class BakingModel {
         this.ingredientsList = ingredientsList;
     }
 
-    public List<Steps> getStepsList() {
+    public ArrayList<ArrayList<Steps>> getStepsList() {
         return stepsList;
     }
 
-    public void setStepsList(List<Steps> stepsList) {
+    public void setStepsList(ArrayList<ArrayList<Steps>> stepsList) {
         this.stepsList = stepsList;
     }
 
