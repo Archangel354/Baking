@@ -12,4 +12,13 @@ public class StepDetailAdapter {
         void onItemClick(int position);
 
     }
+
+    public void setOnItemClickListener(StepDetailAdapter.OnItemClickListener listener) {
+        sListener = listener;
+    }
+
+    public StepDetailAdapter(Context rContext, OnItemClickListener sListener) {
+        this.rContext = rContext;
+        this.sListener = sListener;
+    }
 }

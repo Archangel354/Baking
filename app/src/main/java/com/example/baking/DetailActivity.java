@@ -17,7 +17,7 @@ import static com.example.baking.MainActivity.EXTRA_INGREDIENTS;
 import static com.example.baking.MainActivity.EXTRA_STEPS;
 
 
-public class DetailActivity extends AppCompatActivity implements DetailAdapter{
+public class DetailActivity extends AppCompatActivity implements DetailAdapter.OnItemClickListener{
 
     private RecyclerView dRecyclerView;
     private ArrayList<BakingModel.Steps> dStepsList;

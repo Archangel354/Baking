@@ -16,6 +16,9 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     private Context dContext;
     private ArrayList<BakingModel.Steps> dStepList;
 
+    public interface OnItemClickListener {
+    }
+
 
     public DetailAdapter(Context context, ArrayList<BakingModel.Steps> stepList) {
         dContext = context;
@@ -44,6 +47,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     public int getItemCount() {
         return dStepList.size();
     }
+
+
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
         //public TextView dTextIngredients;
