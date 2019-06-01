@@ -51,4 +51,9 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         textIngredients.setText(ingredients);
 
     }
+
+    @Override
+    public void OnItemClick(int position) {
+
+    }
 }

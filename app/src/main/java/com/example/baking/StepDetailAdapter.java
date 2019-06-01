@@ -13,7 +13,7 @@ public class StepDetailAdapter {
 
     }
 
-    public void setOnItemClickListener(StepDetailAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
         sListener = listener;
     }
 

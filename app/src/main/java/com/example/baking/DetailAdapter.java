@@ -17,6 +17,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     private ArrayList<BakingModel.Steps> dStepList;
 
     public interface OnItemClickListener {
+        void OnItemClick(int position);
     }
 
 
