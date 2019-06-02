@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
 
@@ -54,6 +55,8 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
 
     @Override
     public void OnItemClick(int position) {
+        Toast.makeText(DetailActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
+
 
     }
 }
