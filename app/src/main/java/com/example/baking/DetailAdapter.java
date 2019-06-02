@@ -59,6 +59,18 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
             super(itemView);
             //dTextIngredients = itemView.findViewById(R.id.txtIngredients);
             dTextViewDescrition = itemView.findViewById(R.id.txtStep);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (dListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            dListener.OnItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }
