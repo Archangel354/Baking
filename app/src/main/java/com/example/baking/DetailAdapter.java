@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.baking.models.BakingModel;
@@ -42,7 +44,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
        String step = currentItem.getDescription();
         //List steps = currentItem.getStepsList();
 
-        detailViewHolder.dTextViewDescrition.setText(step);
+        detailViewHolder.dTextViewDescription.setText(step);
         //detailViewHolder.dTextStep.List(steps);
     }
 
@@ -52,13 +54,29 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
     }
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
-        //public TextView dTextIngredients;
-        public TextView dTextViewDescrition;
+        public TextView dTextViewDescription;
+        public ImageView dImageViewInstruction;
+        LinearLayout childLayout;
+
 
         public DetailViewHolder(View itemView) {
             super(itemView);
-            //dTextIngredients = itemView.findViewById(R.id.txtIngredients);
-            dTextViewDescrition = itemView.findViewById(R.id.txtStep);
+            dTextViewDescription = itemView.findViewById(R.id.txtRecipeStepInstruction);
+            //dImageViewInstruction = itemView.findViewsWithText(R.id.imgInstructionVideo);
+            childLayout = itemView.findViewById(R.id.childlayout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (dListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            dListener.OnItemClick(position);
+
+                        }
+                    }
+                }
+            });
         }
     }
 }
