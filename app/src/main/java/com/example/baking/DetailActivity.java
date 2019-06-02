@@ -45,18 +45,17 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
         dRecyclerView.setHasFixedSize(true);
         dRecyclerView.setAdapter(dAdapter);
+        dAdapter.setOnItemClickListener(DetailActivity.this);
+
         dRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
 
         // Set the adapter on the {@link GridView} so the list can be populated in the user interface
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
         textIngredients.setText(ingredients);
-
     }
 
     @Override
     public void OnItemClick(int position) {
         Toast.makeText(DetailActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
-
-
     }
 }
