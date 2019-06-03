@@ -12,19 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"
-            android:launchMode="singleTop"
-            android:label="Ingredients and Steps"
-            android:parentActivityName=".MainActivity">
-        </activity>
-        <activity android:name=".StepDetailActivity"
-            android:launchMode="singleTop"
+        <activity
+            android:name=".StepDetailActivity"
             android:label="Step Detail View"
-            android:parentActivityName=".DetailActivity">
-        </activity>
+            android:launchMode="singleTop"
+            android:parentActivityName=".DetailActivity"></activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="Ingredients and Steps"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

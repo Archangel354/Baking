@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.example.baking.MainActivity.EXTRA_INGREDIENTS;
@@ -57,5 +58,12 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     @Override
     public void OnItemClick(int position) {
         Toast.makeText(DetailActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
+        Log.i("OnItemClick", "DetailActivity");
+        Intent detailIntent = new Intent(this, StepDetailActivity.class);
+        //BakingModel clickedItem = bakingModelList.get(position);
+        //BakingModel stepsItem = bakingModelList.get(position);
+        //detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
+        //detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));
+        startActivity(detailIntent);
     }
 }
