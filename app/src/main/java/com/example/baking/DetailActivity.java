@@ -60,7 +60,9 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Toast.makeText(DetailActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
         Log.i("OnItemClick", "DetailActivity");
         Intent detailIntent = new Intent(this, StepDetailActivity.class);
-        //BakingModel clickedItem = bakingModelList.get(position);
+        BakingModel.Steps clickedItem = dStepsList.get(position);
+        Log.i("OnItemClick", "step " + clickedItem.getDescription());
+
         //BakingModel stepsItem = bakingModelList.get(position);
         //detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
         //detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));

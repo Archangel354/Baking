@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                     stepsArrayList.add(steps);}
                                 outer.add(stepsArrayList);
                                 bakingModel.setStepsList(outer);
-                                //stepsArrayList.clear();
+
                                 Log.i("LOG MainActivity", "outer: " + bakingModel.getStepsList());
                                 stepsArrayList = new ArrayList<BakingModel.Steps>(stepsArrayList);
                                 stepsArrayList.clear();
