@@ -26,6 +26,8 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
 
     /** Adapter for the gridview of movies from the JSON data */
     private DetailAdapter dAdapter;
+    public static final String EXTRA_VIDEO = "video";
+    public static final String EXTRA_STEP = "step";
 
 
     @Override
@@ -59,13 +61,12 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     public void OnItemClick(int position) {
         Toast.makeText(DetailActivity.this,"Card " + position + " pressed", Toast.LENGTH_SHORT).show();
         Log.i("OnItemClick", "DetailActivity");
-        Intent detailIntent = new Intent(this, StepDetailActivity.class);
+        Intent stepDetailIntent = new Intent(this, StepDetailActivity.class);
         BakingModel.Steps clickedItem = dStepsList.get(position);
         Log.i("OnItemClick", "step " + clickedItem.getDescription());
-
-        //BakingModel stepsItem = bakingModelList.get(position);
-        //detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
-        //detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));
-        startActivity(detailIntent);
+        Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
+        stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
+        stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
+        startActivity(stepDetailIntent);
     }
 }
