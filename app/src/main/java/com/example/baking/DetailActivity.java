@@ -52,7 +52,6 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
 
         dRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this));
 
-        // Set the adapter on the {@link GridView} so the list can be populated in the user interface
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
         textIngredients.setText(ingredients);
     }
