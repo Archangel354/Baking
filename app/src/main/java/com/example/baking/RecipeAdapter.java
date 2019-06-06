@@ -15,7 +15,7 @@ import java.util.List;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private Context rContext;
     private ArrayList<RecipeList> rRecipeList;
-    private OnItemClickListener rListener;
+                  private OnItemClickListener rListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);

@@ -16,11 +16,13 @@
             android:name=".StepDetailActivity"
             android:label="Step Detail View"
             android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize|layoutDirection"
             android:parentActivityName=".DetailActivity"></activity>
         <activity
             android:name=".DetailActivity"
             android:label="Ingredients and Steps"
             android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize|layoutDirection"
             android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

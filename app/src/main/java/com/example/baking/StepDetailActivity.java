@@ -32,7 +32,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         // Load the "No video available" as the background image until a recipe video is available
         sPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.no_video));
         sPlayerView.setPlayer(sPlayer);
-        sPlayer.setPlayWhenReady(true);
+//        sPlayer.setPlayWhenReady(true);
 
         Intent intent = getIntent();
         String step = intent.getStringExtra(EXTRA_STEP);
