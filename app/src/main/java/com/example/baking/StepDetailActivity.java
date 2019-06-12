@@ -29,16 +29,9 @@ import java.net.URI;
 import java.net.URL;
 
 
-
-
 public class StepDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private SimpleExoPlayer sPlayer;
     private PlayerView sPlayerView;
-    //URL myURL = new URL("http://example.com/");
-    /** Tag for the log messages */
-    //public static final String LOG_TAG = StepDetailActivity.class.getSimpleName();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +43,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
         // Load the "No video available" as the background image until a recipe video is available
        sPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.no_video));
-        //sPlayerView.setPlayer(sPlayer);
-//
-//        sPlayer.setPlayWhenReady(true);
-
-
-
-
-
+       //sPlayerView.setPlayer(sPlayer);
+  //      sPlayer.setPlayWhenReady(true);
     }
 
     @Override
@@ -69,6 +56,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         String urlString = intent.getStringExtra(EXTRA_VIDEO);
         Uri myUri = Uri.parse(urlString);
         Log.i("StepDetailActivity", "urlString " + urlString);
+        sPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.no_video));
 
         sPlayer = ExoPlayerFactory.newSimpleInstance(this, new DefaultTrackSelector());
         sPlayerView.setPlayer(sPlayer);
@@ -83,7 +71,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         sPlayer.setPlayWhenReady(true);
         TextView textStep = findViewById(R.id.txtRecipeStepInstruction);
         textStep.setText(step);
-
 
     }
 

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_weight="4"
+        app:default_artwork="@drawable/no_video"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
