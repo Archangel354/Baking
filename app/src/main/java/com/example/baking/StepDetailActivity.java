@@ -37,7 +37,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
-
         // Initialize the player view
         sPlayerView = findViewById(R.id.imgInstructionVideo);
 
@@ -49,7 +48,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onStart() {
-
         super.onStart();
         Intent intent = getIntent();
         String step = intent.getStringExtra(EXTRA_STEP);
