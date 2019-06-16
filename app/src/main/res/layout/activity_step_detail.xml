@@ -14,6 +14,12 @@
         app:default_artwork="@drawable/no_video"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/imgNoVideo"
+        android:src="@drawable/no_video"/>
+
     <TextView
         android:id="@+id/txtRecipeStepInstruction"
         android:layout_width="match_parent"
