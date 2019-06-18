@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import static com.example.baking.DetailActivity.EXTRA_STEP;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
 
+import com.example.baking.models.BakingModel;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -23,10 +25,16 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.ArrayList;
+
 public class StepDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private SimpleExoPlayer sPlayer;
     private PlayerView sPlayerView;
     private ImageView imgNoVideo;
+    private Button btnPrevious;
+    private Button btnNext;
+
+    private ArrayList<BakingModel.Steps> dStepsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,33 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         // Initialize the player view
         sPlayerView = findViewById(R.id.imgInstructionVideo);
         imgNoVideo = findViewById(R.id.imgNoVideo);
+
+        btnPrevious = findViewById(R.id.btnPrevious);
+        btnNext = findViewById(R.id.btnNext);
+
+        final Intent stepDetailIntent = getIntent();
+
+        btnPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StepDetailActivity.this, "Previous Pressed",Toast.LENGTH_SHORT).show();
+                BakingModel.Steps clickedItem = dStepsList.;
+                Log.i("OnItemClick", "step " + clickedItem.getDescription());
+                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
+                stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
+                stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StepDetailActivity.this, "Next Pressed",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 
     @Override
