@@ -28,6 +28,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     private DetailAdapter dAdapter;
     public static final String EXTRA_VIDEO = "video";
     public static final String EXTRA_STEP = "step";
+    public static final String EXTRA_POSITION = "position";
 
 
     @Override
@@ -66,6 +67,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
         stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
         stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
+        stepDetailIntent.putExtra(EXTRA_POSITION, position);
         startActivity(stepDetailIntent);
     }
 }

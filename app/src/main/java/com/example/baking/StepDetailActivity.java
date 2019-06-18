@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.baking.DetailActivity.EXTRA_POSITION;
 import static com.example.baking.DetailActivity.EXTRA_STEP;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
 
@@ -52,8 +53,9 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
                 Toast.makeText(StepDetailActivity.this, "Previous Pressed",Toast.LENGTH_SHORT).show();
-                BakingModel.Steps clickedItem = dStepsList.;
+                BakingModel.Steps clickedItem = dStepsList.get(position -1);
                 Log.i("OnItemClick", "step " + clickedItem.getDescription());
                 Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
                 stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
@@ -76,7 +78,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
-        String step = intent.getStringExtra(EXTRA_STEP);
+        String step = intent.getStringExtra(EXTRA_STEP );
         String urlString = intent.getStringExtra(EXTRA_VIDEO);
         Uri myUri = Uri.parse(urlString);
         Log.i("StepDetailActivity", "urlString: " + urlString + ".");
