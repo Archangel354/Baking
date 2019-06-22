@@ -42,7 +42,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
        String step = currentItem.getDescription();
         //List steps = currentItem.getStepsList();
 
-        detailViewHolder.dTextViewDescrition.setText(step);
+        detailViewHolder.dTextViewDescription.setText(step);
         //detailViewHolder.dTextStep.List(steps);
     }
 
@@ -53,12 +53,12 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.DetailView
 
     public class DetailViewHolder extends RecyclerView.ViewHolder{
         //public TextView dTextIngredients;
-        public TextView dTextViewDescrition;
+        public TextView dTextViewDescription;
 
         public DetailViewHolder(View itemView) {
             super(itemView);
             //dTextIngredients = itemView.findViewById(R.id.txtIngredients);
-            dTextViewDescrition = itemView.findViewById(R.id.txtStep);
+            dTextViewDescription = itemView.findViewById(R.id.txtStep);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
