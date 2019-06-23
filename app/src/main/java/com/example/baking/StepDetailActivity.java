@@ -55,6 +55,10 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             public void onClick(View v) {
                 int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
                 Toast.makeText(StepDetailActivity.this, "Previous position is: " + position,Toast.LENGTH_SHORT).show();
+                if (position <= 0){
+                    Toast.makeText(StepDetailActivity.this, "No previous position available " + position,Toast.LENGTH_SHORT).show();
+                    return;
+                }
 //                BakingModel.Steps clickedItem = dStepsList.get(position -1);
 //                Log.i("OnItemClick", "step " + clickedItem.getDescription());
 //                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
