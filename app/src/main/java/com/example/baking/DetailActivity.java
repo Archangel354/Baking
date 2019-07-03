@@ -42,7 +42,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
        // Log.i("DetailActivity", "steps " + steps.getDescription());
 
-        // Create a new adapter that takes an empty list of movies as input
+        // Create a new adapter that takes an empty list of recipes as input
         dStepsList = steps;
         Log.i("DetailActivity", "steps " + steps);
 

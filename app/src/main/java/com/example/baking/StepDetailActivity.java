@@ -1,5 +1,6 @@
 package com.example.baking;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import static com.example.baking.DetailActivity.EXTRA_POSITION;
 import static com.example.baking.DetailActivity.EXTRA_STEP;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
+import static com.example.baking.MainActivity.EXTRA_STEPS;
 
 import com.example.baking.models.BakingModel;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -49,6 +51,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnNext = findViewById(R.id.btnNext);
 
         final Intent stepDetailIntent = getIntent();
+        ArrayList steps = stepDetailIntent.getStringArrayListExtra(EXTRA_STEPS);
+        dStepsList = steps;
 
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,11 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(StepDetailActivity.this, "No previous position available " + position,Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Context context = v.getContext();
+                //stepDetailIntent = new Intent(context, StepDetailActivity.class);
+                BakingModel.Steps clickedItem = dStepsList.get(position -1);
+
+
 //                BakingModel.Steps clickedItem = dStepsList.get(position -1);
 //                Log.i("OnItemClick", "step " + clickedItem.getDescription());
 //                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
