@@ -64,15 +64,10 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
                     return;
                 }
                 Context context = v.getContext();
-                //stepDetailIntent = new Intent(context, StepDetailActivity.class);
                 BakingModel.Steps clickedItem = dStepsList.get(position -1);
 
 
-//                BakingModel.Steps clickedItem = dStepsList.get(position -1);
-//                Log.i("OnItemClick", "step " + clickedItem.getDescription());
-//                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
- //               stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
-  //              stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
+
             }
         });
 
