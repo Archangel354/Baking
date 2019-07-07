@@ -90,6 +90,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         String urlString = intent.getStringExtra(EXTRA_VIDEO);
         Uri myUri = Uri.parse(urlString);
         Log.i("StepDetailActivity", "urlString: " + urlString + ".");
+
         if (urlString.isEmpty()) {
             Toast.makeText(this,"No video",
                     Toast.LENGTH_SHORT).show();
