@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,11 +60,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(StepDetailActivity.this, "No previous position available " + position,Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                BakingModel.Steps clickedItem = dStepsList.get(position -1);
-//                Log.i("OnItemClick", "step " + clickedItem.getDescription());
-//                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
- //               stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
-  //              stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
             }
         });
 
@@ -71,11 +67,29 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 Toast.makeText(StepDetailActivity.this, "Next Pressed",Toast.LENGTH_SHORT).show();
-
             }
         });
 
+        if(savedInstanceState == null) {
+            // In two-pane mode, add initial BodyPartFragments to the screen
+            FragmentManager fragmentManager = getSupportFragmentManager();
 
+            // Creating a new head fragment
+//            DescriptionFragment descriptionFragment = new DescriptionFragment();
+//            descriptionFragment.getString();
+//            // Add the fragment to its container using a transaction
+//            fragmentManager.beginTransaction()
+//                    .add(R.id.description_container, descriptionFragment)
+//                    .commit();
+
+            BakingModel step = getIntent().getSerializableExtra(DescriptionFragment.ARG_STEP);
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(DescriptionFragment.ARG_STEP, step);
+            DescriptionFragment fragment = new DescriptionFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.step_detail_container, fragment)
+                    .commit();
     }
 
     @Override
