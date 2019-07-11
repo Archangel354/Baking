@@ -55,9 +55,9 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
-                Toast.makeText(StepDetailActivity.this, "Previous position is: " + position,Toast.LENGTH_SHORT).show();
-                if (position <= 0){
-                    Toast.makeText(StepDetailActivity.this, "No previous position available " + position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(StepDetailActivity.this, "Previous position is: " + position, Toast.LENGTH_SHORT).show();
+                if (position <= 0) {
+                    Toast.makeText(StepDetailActivity.this, "No previous position available " + position, Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -66,31 +66,25 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(StepDetailActivity.this, "Next Pressed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(StepDetailActivity.this, "Next Pressed", Toast.LENGTH_SHORT).show();
             }
         });
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             // In two-pane mode, add initial BodyPartFragments to the screen
             FragmentManager fragmentManager = getSupportFragmentManager();
-
-            // Creating a new head fragment
-//            DescriptionFragment descriptionFragment = new DescriptionFragment();
-//            descriptionFragment.getString();
-//            // Add the fragment to its container using a transaction
-//            fragmentManager.beginTransaction()
-//                    .add(R.id.description_container, descriptionFragment)
-//                    .commit();
 
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
             arguments.putString(EXTRA_STEP, step);
             DescriptionFragment fragment = new DescriptionFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .add(R.id.description_container, fragment)
                     .commit();
+        }
     }
+
 
     @Override
     protected void onStart() {
@@ -120,8 +114,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             sPlayer.prepare(mediaSource);
             sPlayer.setPlayWhenReady(true);
         }
-        TextView textStep = findViewById(R.id.txtRecipeStepInstruction);
-        textStep.setText(step);
+       // TextView textStep = findViewById(R.id.txtRecipeStepInstruction);
+       // textStep.setText(step);
     }
 
     @Override
