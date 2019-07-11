@@ -82,13 +82,13 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 //                    .add(R.id.description_container, descriptionFragment)
 //                    .commit();
 
-            BakingModel step = getIntent().getStringExtra(EXTRA_STEP);
+            String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
-            arguments.putParcelable(DescriptionFragment.ARG_STEP, step);
+            arguments.putString(EXTRA_STEP, step);
             DescriptionFragment fragment = new DescriptionFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.step_detail_container, fragment)
+                    .add(R.id.description_container, fragment)
                     .commit();
     }
 
