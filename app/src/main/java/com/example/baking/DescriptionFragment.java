@@ -26,11 +26,14 @@ public class DescriptionFragment extends Fragment {
     public static final String DESCRIPTION_ID_LIST = "description_ids";
     public static final String LIST_INDEX = "list_index";
 
+    // Tag for logging
+    private static final String TAG = "DescriptionFragment";
+
     // DONE: Rename and change types of parameters
     private ArrayList<Integer> mDescriptionIds;
     private int mListIndex;
 
-    private OnFragmentInteractionListener mListener;
+  //  private OnFragmentInteractionListener mListener;
 
     public DescriptionFragment() {
         // Required empty public constructor
