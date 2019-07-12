@@ -35,6 +35,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     private ImageView imgNoVideo;
     private Button btnPrevious;
     private Button btnNext;
+    private BakingModel.Steps steps;
 
     private ArrayList<BakingModel.Steps> dStepsList;
 
@@ -50,6 +51,14 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnNext = findViewById(R.id.btnNext);
 
         final Intent stepDetailIntent = getIntent();
+        int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
+        String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
+
+        //BakingModel.Steps steps
+
+        Log.i("StepDetailActivity", "description: " + description + ".");
+
+
 
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +85,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
-            arguments.putString(EXTRA_STEP, step);
+            arguments.putString(EXTRA_STEP, description);
             DescriptionFragment fragment = new DescriptionFragment();
             fragment.setArguments(arguments);
             fragmentManager.beginTransaction()
