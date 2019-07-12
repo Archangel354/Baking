@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.baking.models.BakingModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +38,8 @@ public class DescriptionFragment extends Fragment {
     private ArrayList<Integer> mDescriptionIds;
     private int mListIndex;
 
+    private BakingModel.Steps steps;
+
   //  private OnFragmentInteractionListener mListener;
 
     public DescriptionFragment() {
@@ -57,14 +64,6 @@ public class DescriptionFragment extends Fragment {
         return fragment;
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mDescriptionIds = getArguments().getString(DESCRIPTION_ID_LIST);
-//            mListIndex = getArguments().getString(LIST_INDEX);
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -74,6 +73,20 @@ public class DescriptionFragment extends Fragment {
             mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
             mListIndex = savedInstanceState.getInt(LIST_INDEX);
         }
+
+        if (steps != null) {
+            // Inflate the Android-Me fragment layout
+            View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+            ((TextView) rootView.findViewById(R.id.step_description)).setText(steps.getDescription());
+        }
+        else {
+            Log.i("DescriptionFragment","steps is null");
+
+
+
+        }
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_description, container, false);
     }
