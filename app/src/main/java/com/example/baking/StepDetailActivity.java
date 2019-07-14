@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import static com.example.baking.DetailActivity.EXTRA_POSITION;
 import static com.example.baking.DetailActivity.EXTRA_STEP;
+import static com.example.baking.DetailActivity.EXTRA_STEPLIST;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
 
 import com.example.baking.models.BakingModel;
@@ -53,10 +55,15 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         final Intent stepDetailIntent = getIntent();
         int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
+        Parcelable[] stepList = stepDetailIntent.getParcelableArrayExtra(EXTRA_STEPLIST);
+
 
         //BakingModel.Steps steps
 
+        Log.i("StepDetailActivity", "position: " + position + ".");
         Log.i("StepDetailActivity", "description: " + description + ".");
+        Log.i("StepDetailActivity", "stepList: " + stepList + ".");
+
 
 
 
@@ -86,10 +93,10 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
             arguments.putString(EXTRA_STEP, description);
-            DescriptionFragment fragment = new DescriptionFragment();
-            fragment.setArguments(arguments);
+            DescriptionFragment descriptionFragment = new DescriptionFragment();
+            descriptionFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
-                    .add(R.id.description_container, fragment)
+                    .add(R.id.description_container, descriptionFragment)
                     .commit();
         }
     }

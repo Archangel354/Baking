@@ -57,14 +57,11 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            //List<BakingModel> bakingModelList = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject recipeName = response.getJSONObject(i);
                                 BakingModel bakingModel = new BakingModel();
                                 bakingModel.setRecipeName(recipeName.getString("name"));
-                                //stepsArrayList.clear();
                                 Log.v("i", String.valueOf(i));
-                                //final List<String> ingredientsList = new ArrayList<>();
                                 String ingredientsList = "";
                                 for (int j = 0; j < recipeName.getJSONArray("ingredients").length(); j++){
                                     JSONObject ingredientsObject = recipeName.getJSONArray("ingredients").getJSONObject(j);
@@ -79,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
                                 }
                                 Log.i("LOG ingredientsList: ",  ingredientsList.toString());
                                 bakingModel.setIngredientsList(ingredientsList);
-                                //stepsArrayList.clear();
-                                // stepsArrayList = new ArrayList<BakingModel.Steps>(stepsArrayList);
                                 for (int k = 0; k < recipeName.getJSONArray("steps").length(); k++) {
                                     JSONObject stepsObject = recipeName.getJSONArray("steps").getJSONObject(k);
                                     BakingModel.Steps steps = new BakingModel.Steps();
@@ -128,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         BakingModel stepsItem = bakingModelList.get(position);
         Log.i("OnClick", "ingredients " + clickedItem.getIngredientsList());
         Log.i("OnClick", "getStepsList:\n " + stepsItem.getStepsList().get(position));
-        detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredientsList());
+        detailIntent.putExtra(EXTRA_INGREDIENTS, stepsItem.getIngredientsList());
         detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));
         startActivity(detailIntent);
     }

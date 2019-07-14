@@ -1,6 +1,7 @@
 package com.example.baking;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,6 +29,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     private DetailAdapter dAdapter;
     public static final String EXTRA_VIDEO = "video";
     public static final String EXTRA_STEP = "step";
+    public static final String EXTRA_STEPLIST = "steplist";
     public static final String EXTRA_POSITION = "position";
 
 
@@ -65,9 +67,13 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         BakingModel.Steps clickedItem = dStepsList.get(position);
         Log.i("OnItemClick", "step " + clickedItem.getDescription());
         Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
+        Log.i("OnItemClick", "steps " + dStepsList);
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(EXTRA_STEPLIST, dStepsList);
         stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
         stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
         stepDetailIntent.putExtra(EXTRA_POSITION, position);
+        //stepDetailIntent.putExtra(EXTRA_STEPLIST,dStepsList);
         startActivity(stepDetailIntent);
     }
 }

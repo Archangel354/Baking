@@ -16,6 +16,8 @@ import com.example.baking.models.BakingModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.baking.DetailActivity.EXTRA_STEP;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,10 +58,10 @@ public class DescriptionFragment extends Fragment {
      */
     // DONE: Rename and change types and number of parameters
     public static DescriptionFragment newInstance(ArrayList<Integer> mDescriptionIds, int mListIndex) {
-        DescriptionFragment fragment = new DescriptionFragment();
         Bundle args = new Bundle();
         args.putIntegerArrayList(DESCRIPTION_ID_LIST, mDescriptionIds);
         args.putInt(LIST_INDEX, mListIndex);
+        DescriptionFragment fragment = new DescriptionFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,6 +76,7 @@ public class DescriptionFragment extends Fragment {
             mListIndex = savedInstanceState.getInt(LIST_INDEX);
         }
 
+        //EXTRA_STEP
         if (steps != null) {
             // Inflate the Android-Me fragment layout
             View rootView = inflater.inflate(R.layout.fragment_description, container, false);
