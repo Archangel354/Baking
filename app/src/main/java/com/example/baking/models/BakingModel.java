@@ -1,5 +1,8 @@
 package com.example.baking.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -72,12 +75,48 @@ public class BakingModel {
         }
     }
 
-    public static class Steps implements Serializable {
+    public static class Steps implements Parcelable {
         private String shortDescription;
         private String description;
         private String videoURL;
         private String thumbnailURL;
 
+
+        public Steps(Parcel in) {
+            shortDescription = in.readString();
+            description = in.readString();
+            videoURL = in.readString();
+            thumbnailURL = in.readString();
+        }
+
+        // This contructor was necessary in order to instantiate  Steps in MainActivity
+        public Steps() {
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(shortDescription);
+            dest.writeString(description);
+            dest.writeString(videoURL);
+            dest.writeString(thumbnailURL);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<Steps> CREATOR = new Creator<Steps>() {
+            @Override
+            public Steps createFromParcel(Parcel in) {
+                return new Steps(in);
+            }
+
+            @Override
+            public Steps[] newArray(int size) {
+                return new Steps[size];
+            }
+        };
 
         public String getShortDescription() {
             return shortDescription;

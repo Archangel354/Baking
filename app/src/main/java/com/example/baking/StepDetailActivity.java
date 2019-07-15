@@ -29,6 +29,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StepDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,7 +56,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         final Intent stepDetailIntent = getIntent();
         int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
-        Parcelable[] stepList = stepDetailIntent.getParcelableArrayExtra(EXTRA_STEPLIST);
+        ArrayList stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
 
 
         //BakingModel.Steps steps
