@@ -73,6 +73,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
         stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
         stepDetailIntent.putExtra(EXTRA_POSITION, position);
+        stepDetailIntent.putExtras(arguments);
         //stepDetailIntent.putExtra(EXTRA_STEPLIST,dStepsList);
         startActivity(stepDetailIntent);
     }
