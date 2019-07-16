@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +25,7 @@ import static com.example.baking.DetailActivity.EXTRA_STEP;
  * Activities that contain this fragment must implement the
  * {@link DescriptionFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DescriptionFragment#newInstance} factory method to
- * create an instance of this fragment.
+
  */
 public class DescriptionFragment extends Fragment {
     // DONE: Rename parameter arguments, choose names that match
@@ -41,6 +41,7 @@ public class DescriptionFragment extends Fragment {
     private int mListIndex;
 
     private BakingModel.Steps steps;
+    protected String mStep;
 
   //  private OnFragmentInteractionListener mListener;
 
@@ -48,27 +49,22 @@ public class DescriptionFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param mDescriptionIds Parameter 1.
-     * @param mListIndex Parameter 2.
-     * @return A new instance of fragment DescriptionFragment.
-     */
-    // DONE: Rename and change types and number of parameters
-    public static DescriptionFragment newInstance(ArrayList<Integer> mDescriptionIds, int mListIndex) {
-        Bundle args = new Bundle();
-        args.putIntegerArrayList(DESCRIPTION_ID_LIST, mDescriptionIds);
-        args.putInt(LIST_INDEX, mListIndex);
-        DescriptionFragment fragment = new DescriptionFragment();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments().containsKey(EXTRA_STEP)) {
+            mStep = getArguments().getString(EXTRA_STEP);
+            Log.i("DescriptionFragment","mStep: " +mStep );
+        }
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+
+        Log.i("DescriptionFragment oCV","mStep: " +mStep );
 
         // Load the saved state (the list of images and list index) if there is one
         if(savedInstanceState != null) {
@@ -77,23 +73,17 @@ public class DescriptionFragment extends Fragment {
         }
 
         //EXTRA_STEP
-        if (steps != null) {
+        if (mStep != null) {
             // Inflate the Android-Me fragment layout
-            View rootView = inflater.inflate(R.layout.fragment_description, container, false);
-            ((TextView) rootView.findViewById(R.id.step_description)).setText(steps.getDescription());
+            ((TextView) rootView.findViewById(R.id.step_description)).setText(mStep);
         }
         else {
             Log.i("DescriptionFragment","steps is null");
-
-
-
         }
 
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_description, container, false);
+        return rootView;
     }
-
 
 
     /**
@@ -106,8 +96,8 @@ public class DescriptionFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+//    public interface OnFragmentInteractionListener {
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+//    }
 }

@@ -70,7 +70,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         Log.i("StepDetailActivity", "position: " + position + ".");
         Log.i("StepDetailActivity", "description: " + description + ".");
         Log.i("StepDetailActivity", "stepList: " + stepList + ".");
-        Log.i("StepDetailActivity", "mDescription: " + mDescription + ".");
 
         //  BakingModel.Steps clickedItem = dStepsList.get(position);
 
@@ -99,6 +98,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         if (savedInstanceState == null) {
             // In two-pane mode, add initial BodyPartFragments to the screen
             FragmentManager fragmentManager = getSupportFragmentManager();
+            Log.i("StepDetailActivity", "mDescription: " + mDescription + ".");
 
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
