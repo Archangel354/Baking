@@ -1,6 +1,7 @@
 package com.example.baking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,15 +10,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.baking.DetailActivity.EXTRA_POSITION;
 import static com.example.baking.DetailActivity.EXTRA_STEP;
+import static com.example.baking.DetailActivity.EXTRA_VIDEO;
+import static com.example.baking.StepDetailActivity.EXTRA_DETAILSTEPLIST;
 
 
 /**
@@ -41,7 +54,12 @@ public class DescriptionFragment extends Fragment {
     private int mListIndex;
 
     private BakingModel.Steps steps;
-    protected String mStep;
+    protected ArrayList<BakingModel.Steps> mStep;
+    private String dDescription;
+    private SimpleExoPlayer sPlayer;
+    private PlayerView sPlayerView;
+    private ImageView imgNoVideo;
+    private Integer dPosition;
 
   //  private OnFragmentInteractionListener mListener;
 
@@ -53,8 +71,9 @@ public class DescriptionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(EXTRA_STEP)) {
-            mStep = getArguments().getString(EXTRA_STEP);
+        if (getArguments().containsKey(EXTRA_DETAILSTEPLIST)) {
+            mStep = getArguments().getParcelable(EXTRA_DETAILSTEPLIST);
+            dPosition =getArguments().getInt(EXTRA_POSITION);
             Log.i("DescriptionFragment","mStep: " +mStep );
         }
     }
@@ -65,6 +84,7 @@ public class DescriptionFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_description, container, false);
 
         Log.i("DescriptionFragment oCV","mStep: " +mStep );
+       //dDescription = mStep.
 
         // Load the saved state (the list of images and list index) if there is one
         if(savedInstanceState != null) {
@@ -75,7 +95,14 @@ public class DescriptionFragment extends Fragment {
         //EXTRA_STEP
         if (mStep != null) {
             // Inflate the Android-Me fragment layout
-            ((TextView) rootView.findViewById(R.id.step_description)).setText(mStep);
+            ((TextView) rootView.findViewById(R.id.step_description)).setText(dDescription);
+            if (mStep.get(dPosition).getVideoURL() != null && !mStep.get(dPosition).getVideoURL().equals("")) {
+                sPlayerView.setVisibility(View.VISIBLE);
+                initializeMediaSession();
+                initializePlayer(Uri.parse(mStep.getVideoURL()));
+            } else {
+                mPlayerView.setVisibility(View.GONE);
+            }
         }
         else {
             Log.i("DescriptionFragment","steps is null");
@@ -85,6 +112,33 @@ public class DescriptionFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        String step = intent.getStringExtra(EXTRA_STEP );
+        String urlString = intent.getStringExtra(EXTRA_VIDEO);
+        Uri myUri = Uri.parse(urlString);
+        Log.i("StepDetailActivity", "urlString: " + urlString + ".");
+        if (urlString.isEmpty()) {
+            sPlayerView.setVisibility(View.GONE);
+            imgNoVideo.setVisibility(View.VISIBLE);
+        }
+        else {
+            sPlayerView.setVisibility(View.VISIBLE);
+            imgNoVideo.setVisibility(View.GONE);
+            sPlayer = ExoPlayerFactory.newSimpleInstance(this, new DefaultTrackSelector());
+            sPlayerView.setPlayer(sPlayer);
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
+                    this,
+                    Util.getUserAgent(this, getString(R.string.app_name)));
+            ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                    .createMediaSource(myUri);
+
+            sPlayer.prepare(mediaSource);
+            sPlayer.setPlayWhenReady(true);
+        }
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -96,8 +150,8 @@ public class DescriptionFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
 }

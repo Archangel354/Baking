@@ -41,6 +41,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     private BakingModel.Steps steps;
 
     private ArrayList<BakingModel.Steps> dStepsList;
+    public static final String EXTRA_DETAILSTEPLIST = "detailsteplist";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,23 +60,13 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         //BakingModel.Steps mSteps = (BakingModel.Steps) data.getParcelable(EXTRA_STEPLIST);
         int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
-        ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
+        ArrayList<BakingModel.Steps> sStepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
 
-
-        Integer arraySize = stepList.size();
-        String mDescription = stepList.get(position + 1).getDescription();
-
-
-        //BakingModel.Steps steps
-
+        Integer arraySize = sStepList.size();
+        String mDescription = sStepList.get(position + 1).getDescription();
         Log.i("StepDetailActivity", "position: " + position + ".");
         Log.i("StepDetailActivity", "description: " + description + ".");
-        Log.i("StepDetailActivity", "stepList: " + stepList + ".");
-
-        //  BakingModel.Steps clickedItem = dStepsList.get(position);
-
-
-
+        Log.i("StepDetailActivity", "stepList: " + sStepList + ".");
 
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +94,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
-            arguments.putString(EXTRA_STEP, description);
+            arguments.putParcelableArrayList(EXTRA_DETAILSTEPLIST, sStepList);
+            arguments.putInt(EXTRA_POSITION,position);
             DescriptionFragment descriptionFragment = new DescriptionFragment();
             descriptionFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
@@ -115,31 +108,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = getIntent();
-        String step = intent.getStringExtra(EXTRA_STEP );
-        String urlString = intent.getStringExtra(EXTRA_VIDEO);
-        Uri myUri = Uri.parse(urlString);
-        Log.i("StepDetailActivity", "urlString: " + urlString + ".");
-        if (urlString.isEmpty()) {
-            Toast.makeText(this,"No video",
-                    Toast.LENGTH_SHORT).show();
-            sPlayerView.setVisibility(View.GONE);
-            imgNoVideo.setVisibility(View.VISIBLE);
-        }
-        else {
-            sPlayerView.setVisibility(View.VISIBLE);
-            imgNoVideo.setVisibility(View.GONE);
-            sPlayer = ExoPlayerFactory.newSimpleInstance(this, new DefaultTrackSelector());
-            sPlayerView.setPlayer(sPlayer);
-            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
-                    this,
-                    Util.getUserAgent(this, getString(R.string.app_name)));
-            ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(myUri);
 
-            sPlayer.prepare(mediaSource);
-            sPlayer.setPlayWhenReady(true);
-        }
        // TextView textStep = findViewById(R.id.txtRecipeStepInstruction);
        // textStep.setText(step);
     }
