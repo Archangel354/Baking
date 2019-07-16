@@ -60,7 +60,9 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
         ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
 
+
         Integer arraySize = stepList.size();
+        String mDescription = stepList.get(position + 1).getDescription();
 
 
         //BakingModel.Steps steps
@@ -68,7 +70,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         Log.i("StepDetailActivity", "position: " + position + ".");
         Log.i("StepDetailActivity", "description: " + description + ".");
         Log.i("StepDetailActivity", "stepList: " + stepList + ".");
-        Log.i("StepDetailActivity", "stepList size: " + arraySize + ".");
+        Log.i("StepDetailActivity", "mDescription: " + mDescription + ".");
 
         //  BakingModel.Steps clickedItem = dStepsList.get(position);
 
