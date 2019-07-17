@@ -39,7 +39,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     private Button btnPrevious;
     private Button btnNext;
     private BakingModel.Steps steps;
-
     private ArrayList<BakingModel.Steps> dStepsList;
 
     @Override
@@ -57,8 +56,11 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         //Bundle data = stepDetailIntent.getExtras();
         //BakingModel.Steps mSteps = (BakingModel.Steps) data.getParcelable(EXTRA_STEPLIST);
         int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
-        String description = stepDetailIntent.getStringExtra(EXTRA_STEP);
         ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
+        String sDescription = stepList.get(position).getDescription();
+        String sUrlString = stepList.get(position).getVideoURL();
+
+
 
 
         Integer arraySize = stepList.size();
@@ -68,7 +70,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         //BakingModel.Steps steps
 
         Log.i("StepDetailActivity", "position: " + position + ".");
-        Log.i("StepDetailActivity", "description: " + description + ".");
+        Log.i("StepDetailActivity", "description: " + sDescription + ".");
         Log.i("StepDetailActivity", "stepList: " + stepList + ".");
 
         //  BakingModel.Steps clickedItem = dStepsList.get(position);
@@ -102,25 +104,21 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
             String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
-            arguments.putString(EXTRA_STEP, description);
+            arguments.putString(EXTRA_STEP, sDescription);
             DescriptionFragment descriptionFragment = new DescriptionFragment();
             descriptionFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
                     .add(R.id.description_container, descriptionFragment)
                     .commit();
         }
-    }
 
+        //Intent intent = getIntent();
+        //String step = intent.getStringExtra(EXTRA_STEP );
+        //String urlString = intent.getStringExtra(EXTRA_VIDEO);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent intent = getIntent();
-        String step = intent.getStringExtra(EXTRA_STEP );
-        String urlString = intent.getStringExtra(EXTRA_VIDEO);
-        Uri myUri = Uri.parse(urlString);
-        Log.i("StepDetailActivity", "urlString: " + urlString + ".");
-        if (urlString.isEmpty()) {
+        Uri myUri = Uri.parse(sUrlString);
+        Log.i("StepDetailActivity", "urlString: " + sUrlString + ".");
+        if (sUrlString.isEmpty()) {
             Toast.makeText(this,"No video",
                     Toast.LENGTH_SHORT).show();
             sPlayerView.setVisibility(View.GONE);
@@ -140,9 +138,17 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             sPlayer.prepare(mediaSource);
             sPlayer.setPlayWhenReady(true);
         }
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        }
        // TextView textStep = findViewById(R.id.txtRecipeStepInstruction);
        // textStep.setText(step);
-    }
+
 
     @Override
     protected void onStop() {
