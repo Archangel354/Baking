@@ -42,9 +42,6 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
         ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
-       // Log.i("DetailActivity", "steps " + steps.getDescription());
-
-        // Create a new adapter that takes an empty list of movies as input
         dStepsList = steps;
         Log.i("DetailActivity", "steps " + steps);
 
@@ -69,10 +66,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
         Log.i("OnItemClick", "steps " + dStepsList);
         Bundle arguments = new Bundle();
-        //arguments.putParcelableArrayList(EXTRA_STEPLIST, dStepsList);
         stepDetailIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
-        //stepDetailIntent.putExtra(EXTRA_STEP, clickedItem.getDescription());
-        //stepDetailIntent.putExtra(EXTRA_VIDEO, clickedItem.getVideoURL());
         stepDetailIntent.putExtra(EXTRA_POSITION, position);
         stepDetailIntent.putExtras(arguments);
         startActivity(stepDetailIntent);

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.baking.DetailActivity.EXTRA_STEP;
+import static com.example.baking.DetailActivity.EXTRA_VIDEO;
 
 
 /**
@@ -42,6 +43,7 @@ public class DescriptionFragment extends Fragment {
 
     private BakingModel.Steps steps;
     protected String mStep;
+    protected String mUrlString = null;
 
   //  private OnFragmentInteractionListener mListener;
 
@@ -56,6 +58,11 @@ public class DescriptionFragment extends Fragment {
         if (getArguments().containsKey(EXTRA_STEP)) {
             mStep = getArguments().getString(EXTRA_STEP);
             Log.i("DescriptionFragment","mStep: " +mStep );
+        }
+
+        if (getArguments().containsKey(EXTRA_VIDEO)) {
+            mUrlString = getArguments().getString(EXTRA_VIDEO);
+            Log.i("DescriptionFragment","mUrlString: " +mUrlString );
         }
     }
 

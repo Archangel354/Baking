@@ -53,30 +53,16 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnNext = findViewById(R.id.btnNext);
 
         final Intent stepDetailIntent = getIntent();
-        //Bundle data = stepDetailIntent.getExtras();
-        //BakingModel.Steps mSteps = (BakingModel.Steps) data.getParcelable(EXTRA_STEPLIST);
         int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
         String sDescription = stepList.get(position).getDescription();
         String sUrlString = stepList.get(position).getVideoURL();
-
-
-
-
         Integer arraySize = stepList.size();
         String mDescription = stepList.get(position + 1).getDescription();
-
-
-        //BakingModel.Steps steps
 
         Log.i("StepDetailActivity", "position: " + position + ".");
         Log.i("StepDetailActivity", "description: " + sDescription + ".");
         Log.i("StepDetailActivity", "stepList: " + stepList + ".");
-
-        //  BakingModel.Steps clickedItem = dStepsList.get(position);
-
-
-
 
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,19 +88,16 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             FragmentManager fragmentManager = getSupportFragmentManager();
             Log.i("StepDetailActivity", "mDescription: " + mDescription + ".");
 
-            String step = getIntent().getStringExtra(EXTRA_STEP);
+            //String step = getIntent().getStringExtra(EXTRA_STEP);
             Bundle arguments = new Bundle();
             arguments.putString(EXTRA_STEP, sDescription);
+            arguments.putString(EXTRA_VIDEO, sUrlString);
             DescriptionFragment descriptionFragment = new DescriptionFragment();
             descriptionFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
                     .add(R.id.description_container, descriptionFragment)
                     .commit();
         }
-
-        //Intent intent = getIntent();
-        //String step = intent.getStringExtra(EXTRA_STEP );
-        //String urlString = intent.getStringExtra(EXTRA_VIDEO);
 
         Uri myUri = Uri.parse(sUrlString);
         Log.i("StepDetailActivity", "urlString: " + sUrlString + ".");
