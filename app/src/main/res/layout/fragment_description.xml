@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DescriptionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/imgInstructionVideo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_weight="4"
+        app:default_artwork="@drawable/no_video"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/imgNoVideo"
+        android:src="@drawable/no_video"/>
     <TextView
         android:id="@+id/step_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+</LinearLayout>

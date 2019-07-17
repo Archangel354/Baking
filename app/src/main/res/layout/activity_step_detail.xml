@@ -6,24 +6,12 @@
     android:id="@+id/childlayout"
     android:orientation="vertical">
 
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/imgInstructionVideo"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_weight="4"
-        app:default_artwork="@drawable/no_video"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/imgNoVideo"
-        android:src="@drawable/no_video"/>
 
     <!-- This container holds the description Fragment of the Baking Step Detail View -->
     <FrameLayout android:id="@+id/description_container"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="480dp"
         android:scaleType="centerInside"/>
 
 

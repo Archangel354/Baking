@@ -33,9 +33,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StepDetailActivity extends AppCompatActivity implements View.OnClickListener {
-    private SimpleExoPlayer sPlayer;
-    private PlayerView sPlayerView;
-    private ImageView imgNoVideo;
+
     private Button btnPrevious;
     private Button btnNext;
     private BakingModel.Steps steps;
@@ -45,9 +43,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
-        // Initialize the player view
-        sPlayerView = findViewById(R.id.imgInstructionVideo);
-        imgNoVideo = findViewById(R.id.imgNoVideo);
+
 
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
@@ -98,29 +94,6 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
                     .add(R.id.description_container, descriptionFragment)
                     .commit();
         }
-
-        Uri myUri = Uri.parse(sUrlString);
-        Log.i("StepDetailActivity", "urlString: " + sUrlString + ".");
-        if (sUrlString.isEmpty()) {
-            Toast.makeText(this,"No video",
-                    Toast.LENGTH_SHORT).show();
-            sPlayerView.setVisibility(View.GONE);
-            imgNoVideo.setVisibility(View.VISIBLE);
-        }
-        else {
-            sPlayerView.setVisibility(View.VISIBLE);
-            imgNoVideo.setVisibility(View.GONE);
-            sPlayer = ExoPlayerFactory.newSimpleInstance(this, new DefaultTrackSelector());
-            sPlayerView.setPlayer(sPlayer);
-            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
-                    this,
-                    Util.getUserAgent(this, getString(R.string.app_name)));
-            ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(myUri);
-
-            sPlayer.prepare(mediaSource);
-            sPlayer.setPlayWhenReady(true);
-        }
     }
 
 
@@ -133,20 +106,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
        // textStep.setText(step);
 
 
-    @Override
-    protected void onStop() {
-        sPlayerView.setPlayer(null);
-        if (sPlayer != null) {
-            sPlayer.release();
-        }
-        sPlayer = null;
-        super.onStop();
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void onClick(View v) {
