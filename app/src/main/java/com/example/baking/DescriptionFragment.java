@@ -71,6 +71,7 @@ public class DescriptionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //View view = inflater.inflate(R.layout.fragment_description, container, false);
 
         if (getArguments().containsKey(EXTRA_STEP)) {
             mStep = getArguments().getString(EXTRA_STEP);
@@ -84,19 +85,14 @@ public class DescriptionFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view,Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-
-
-        View view = inflater.inflate(R.layout.fragment_description, container, false);
-        // Initialize the player view
-        sPlayerView = getView().findViewById(R.id.imgInstructionVideo);
-        imgNoVideo = getView().findViewById(R.id.imgNoVideo);
         View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+
 
         Log.i("DescriptionFragment oCV","mStep: " +mStep );
 
@@ -105,6 +101,9 @@ public class DescriptionFragment extends Fragment {
             mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
             mListIndex = savedInstanceState.getInt(LIST_INDEX);
         }
+// Initialize the player view
+        sPlayerView = getView().findViewById(R.id.imgInstructionVideo);
+        imgNoVideo = getView().findViewById(R.id.imgNoVideo);
 
         //EXTRA_STEP
         if (mStep != null) {
