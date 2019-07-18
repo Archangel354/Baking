@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DescriptionFragment">
 
-    <com.google.android.exoplayer2.ui.PlayerView
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/imgInstructionVideo"
         android:layout_width="match_parent"
         android:layout_height="300dp"

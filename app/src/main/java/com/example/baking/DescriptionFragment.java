@@ -3,6 +3,7 @@ package com.example.baking;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +19,30 @@ import com.example.baking.models.BakingModel;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.RenderersFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static com.example.baking.DetailActivity.EXTRA_STEP;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
@@ -54,13 +70,15 @@ public class DescriptionFragment extends Fragment {
     private BakingModel.Steps steps;
     protected String mStep;
     protected String mUrlString = null;
-    private SimpleExoPlayer sPlayer;
-    private PlayerView sPlayerView;
+    //private SimpleExoPlayer sPlayer;
+   //private PlayerView sPlayerView;
     private ImageView imgNoVideo;
 
-
-
-    //  private OnFragmentInteractionListener mListener;
+    // new stuff based on example
+    @BindView(R.id.imgInstructionVideo)
+    SimpleExoPlayerView sPlayerView;
+    private SimpleExoPlayer sPlayer;
+    private Unbinder unbinder;
 
     public DescriptionFragment() {
         // Required empty public constructor
@@ -84,75 +102,98 @@ public class DescriptionFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onViewCreated(View view,Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
 
 
-        Log.i("DescriptionFragment oCV","mStep: " +mStep );
+//        Log.i("DescriptionFragment oCV","mStep: " +mStep );
+//
+//        // Load the saved state (the list of images and list index) if there is one
+//        if(savedInstanceState != null) {
+//            mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
+//            mListIndex = savedInstanceState.getInt(LIST_INDEX);
 
-        // Load the saved state (the list of images and list index) if there is one
-        if(savedInstanceState != null) {
-            mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
-            mListIndex = savedInstanceState.getInt(LIST_INDEX);
-        }
-// Initialize the player view
-        sPlayerView = getView().findViewById(R.id.imgInstructionVideo);
-        imgNoVideo = getView().findViewById(R.id.imgNoVideo);
-
-        //EXTRA_STEP
-        if (mStep != null) {
-            // Inflate the Android-Me fragment layout
-            ((TextView) rootView.findViewById(R.id.step_description)).setText(mStep);
-
-            Uri myUri = Uri.parse(mUrlString);
-            Log.i("StepDetailActivity", "urlString: " + mUrlString + ".");
-            if (mUrlString.isEmpty()) {
-                sPlayerView.setVisibility(View.GONE);
-                imgNoVideo.setVisibility(View.VISIBLE);
-            }
-            else {
-                sPlayerView.setVisibility(View.VISIBLE);
-                imgNoVideo.setVisibility(View.GONE);
-                sPlayer = ExoPlayerFactory.newSimpleInstance((RenderersFactory) DescriptionFragment.this, new DefaultTrackSelector());
-                sPlayerView.setPlayer(sPlayer);
-                DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
-                        getContext(),
-                        Util.getUserAgent(getContext(), getString(R.string.app_name)));
-                ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                        .createMediaSource(myUri);
-
-                sPlayer.prepare(mediaSource);
-                sPlayer.setPlayWhenReady(true);
-            }
-        }
-        else {
-            Log.i("DescriptionFragment","steps is null");
-        }
-
-        // Inflate the layout for this fragment
+        getPlayer();
         return rootView;
-    }
-
-    @Override
-    public void onStop() {
-        sPlayerView.setPlayer(null);
-        if (sPlayer != null) {
-            sPlayer.release();
         }
-        sPlayer = null;
-        super.onStop();
-    }
+
+        private void getPlayer(){
+
+        String videoURL = mUrlString;
+
+            Handler mainHandler = new Handler();
+
+            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+            TrackSelection.Factory videoTrackSelectionFactory =
+                    new AdaptiveTrackSelection.Factory(bandwidthMeter);
+            TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+
+            sPlayer = ExoPlayerFactory.newSimpleInstance(getContext(),trackSelector);
+
+           // Load the default controller
+            sPlayerView.setUseController(true);
+            sPlayerView.requestFocus();
+
+            // Load the SimpleExoPlayerView with the created player
+            sPlayerView.setPlayer(sPlayer);
+
+            // Measures bandwidth during playback. Can be null if not required.
+            DefaultBandwidthMeter defaultBandwidthMeter = new DefaultBandwidthMeter();
+
+            // Produces DataSource instances through which media data is loaded.
+            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
+                    getContext(),
+                    Util.getUserAgent(getContext(), "MyAppName"),
+                    defaultBandwidthMeter);
+
+            // Produces Extractor instances for parsing the media data.
+            ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+
+            // This is the MediaSource representing the media to be played.
+            MediaSource videoSource = new ExtractorMediaSource(
+                    Uri.parse(videoURL),
+                    dataSourceFactory,
+                    extractorsFactory,
+                    null,
+                    null);
+
+            // Prepare the player with the source.
+            sPlayer.prepare(videoSource);
+
+            // Autoplay the video when the player is ready
+            sPlayer.setPlayWhenReady(true);
+
+
+        }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+
+        // Release the player when it is not needed
+        sPlayer.release();
     }
+
+//    @Override
+//    public void onStop() {
+//        sPlayerView.setPlayer(null);
+//        if (sPlayer != null) {
+//            sPlayer.release();
+//        }
+//        sPlayer = null;
+//        super.onStop();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
