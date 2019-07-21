@@ -191,34 +191,4 @@ public class StepFragment extends Fragment {
         // Release the player when it is not needed
         sPlayer.release();
     }
-
-//    @Override
-//    public void onStop() {
-//        sPlayerView.setPlayer(null);
-//        if (sPlayer != null) {
-//            sPlayer.release();
-//        }
-//        sPlayer = null;
-//        super.onStop();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
 }
