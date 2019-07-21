@@ -1,5 +1,6 @@
 package com.example.baking;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -64,7 +66,9 @@ public class StepFragment extends Fragment {
     protected String mUrlString = null;
     //private SimpleExoPlayer sPlayer;
    //private PlayerView sPlayerView;
-    private ImageView imgNoVideo;
+
+    @BindView(R.id.imgNoVideo)
+    ImageView imgNoVideo;
 
     // new stuff based on example
     @BindView(R.id.imgInstructionVideo)
@@ -103,6 +107,13 @@ public class StepFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
 
 
+
+
+
+
+
+
+
 //        Log.i("StepFragment oCV","mStep: " +mStep );
 //
 //        // Load the saved state (the list of images and list index) if there is one
@@ -117,6 +128,15 @@ public class StepFragment extends Fragment {
         private void getPlayer(){
 
         String videoURL = mUrlString;
+
+            if (videoURL.isEmpty()) {
+                sPlayerView.setVisibility(View.GONE);
+                imgNoVideo.setVisibility(View.VISIBLE);
+            }
+            else {
+                sPlayerView.setVisibility(View.VISIBLE);
+                imgNoVideo.setVisibility(View.GONE);
+            }
 
             Handler mainHandler = new Handler();
 
@@ -159,7 +179,6 @@ public class StepFragment extends Fragment {
 
             // Autoplay the video when the player is ready
             sPlayer.setPlayWhenReady(true);
-
 
         }
 
