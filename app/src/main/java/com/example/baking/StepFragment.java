@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
@@ -62,13 +63,19 @@ public class StepFragment extends Fragment {
     private int mListIndex;
 
     private BakingModel.Steps steps;
-    protected String mStep;
+    //protected String mStep;
     protected String mUrlString = null;
     //private SimpleExoPlayer sPlayer;
    //private PlayerView sPlayerView;
 
     @BindView(R.id.imgNoVideo)
     ImageView imgNoVideo;
+
+    //@BindView(R.id.step_description)
+   String mStep;
+
+
+
 
     // new stuff based on example
     @BindView(R.id.imgInstructionVideo)
@@ -108,7 +115,15 @@ public class StepFragment extends Fragment {
 
 
 
-
+//EXTRA_STEP
+        if (mStep != null) {
+            // Inflate the Android-Me fragment layout
+            TextView text = rootView.findViewById(R.id.step_description);
+            text.setText(mStep);
+        }
+        else {
+            Log.i("DescriptionFragment","steps is null");
+        }
 
 
 
