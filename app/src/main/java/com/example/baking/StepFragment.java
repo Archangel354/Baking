@@ -1,23 +1,17 @@
 package com.example.baking;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.baking.models.BakingModel;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.RenderersFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
@@ -27,7 +21,6 @@ import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
@@ -38,7 +31,6 @@ import com.google.android.exoplayer2.util.Util;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,14 +46,14 @@ import static com.example.baking.DetailActivity.EXTRA_VIDEO;
  * to handle interaction events.
 
  */
-public class DescriptionFragment extends Fragment {
+public class StepFragment extends Fragment {
     // DONE: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String DESCRIPTION_ID_LIST = "description_ids";
     public static final String LIST_INDEX = "list_index";
 
     // Tag for logging
-    private static final String TAG = "DescriptionFragment";
+    private static final String TAG = "StepFragment";
 
     // DONE: Rename and change types of parameters
     private ArrayList<Integer> mDescriptionIds;
@@ -80,7 +72,7 @@ public class DescriptionFragment extends Fragment {
     private SimpleExoPlayer sPlayer;
     private Unbinder unbinder;
 
-    public DescriptionFragment() {
+    public StepFragment() {
         // Required empty public constructor
 
     }
@@ -89,16 +81,16 @@ public class DescriptionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //View view = inflater.inflate(R.layout.fragment_description, container, false);
+        //View view = inflater.inflate(R.layout.fragment_step, container, false);
 
         if (getArguments().containsKey(EXTRA_STEP)) {
             mStep = getArguments().getString(EXTRA_STEP);
-            Log.i("DescriptionFragment","mStep: " +mStep );
+            Log.i("StepFragment","mStep: " +mStep );
         }
 
         if (getArguments().containsKey(EXTRA_VIDEO)) {
             mUrlString = getArguments().getString(EXTRA_VIDEO);
-            Log.i("DescriptionFragment","mUrlString: " +mUrlString );
+            Log.i("StepFragment","mUrlString: " +mUrlString );
         }
     }
 
@@ -107,11 +99,11 @@ public class DescriptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_step, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
 
-//        Log.i("DescriptionFragment oCV","mStep: " +mStep );
+//        Log.i("StepFragment oCV","mStep: " +mStep );
 //
 //        // Load the saved state (the list of images and list index) if there is one
 //        if(savedInstanceState != null) {

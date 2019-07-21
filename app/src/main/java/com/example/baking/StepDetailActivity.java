@@ -1,17 +1,12 @@
 package com.example.baking;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.baking.DetailActivity.EXTRA_POSITION;
@@ -20,16 +15,7 @@ import static com.example.baking.DetailActivity.EXTRA_STEPLIST;
 import static com.example.baking.DetailActivity.EXTRA_VIDEO;
 
 import com.example.baking.models.BakingModel;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class StepDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -88,10 +74,10 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             Bundle arguments = new Bundle();
             arguments.putString(EXTRA_STEP, sDescription);
             arguments.putString(EXTRA_VIDEO, sUrlString);
-            DescriptionFragment descriptionFragment = new DescriptionFragment();
-            descriptionFragment.setArguments(arguments);
+            StepFragment stepFragment = new StepFragment();
+            stepFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
-                    .add(R.id.description_container, descriptionFragment)
+                    .add(R.id.step_container, stepFragment)
                     .commit();
         }
     }

@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".DescriptionFragment">
+    tools:context=".StepFragment">
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/imgInstructionVideo"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_weight="4"
         app:default_artwork="@drawable/no_video"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
