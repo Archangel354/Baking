@@ -114,12 +114,13 @@ public class StepFragment extends Fragment {
 
 
 
-//        Log.i("StepFragment oCV","mStep: " +mStep );
+        Log.i("StepFragment oCV","mStep: " +mStep );
 //
 //        // Load the saved state (the list of images and list index) if there is one
-//        if(savedInstanceState != null) {
-//            mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
-//            mListIndex = savedInstanceState.getInt(LIST_INDEX);
+        if(savedInstanceState != null) {
+            mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
+            mListIndex = savedInstanceState.getInt(LIST_INDEX);
+        }
 
         getPlayer();
         return rootView;
