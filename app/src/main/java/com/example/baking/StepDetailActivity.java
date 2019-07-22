@@ -35,7 +35,7 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         btnNext = findViewById(R.id.btnNext);
 
         final Intent stepDetailIntent = getIntent();
-        int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
+        final int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
         String sDescription = stepList.get(position).getDescription();
         String sUrlString = stepList.get(position).getVideoURL();
@@ -62,6 +62,17 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 Toast.makeText(StepDetailActivity.this, "Next Pressed", Toast.LENGTH_SHORT).show();
+                Intent btnNextIntent = new Intent(StepDetailActivity.this, StepDetailActivity.class);
+                BakingModel.Steps clickedItem = dStepsList.get(position + 1);
+                Log.i("OnItemClick", "step " + clickedItem.getDescription());
+                Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
+                Log.i("OnItemClick", "steps " + dStepsList);
+                Bundle arguments = new Bundle();
+                btnNextIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
+                btnNextIntent.putExtra(EXTRA_POSITION, position);
+                btnNextIntent.putExtras(arguments);
+                startActivity(btnNextIntent);
+
             }
         });
 
