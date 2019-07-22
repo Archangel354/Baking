@@ -65,10 +65,10 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Log.i("OnItemClick", "step " + clickedItem.getDescription());
         Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
         Log.i("OnItemClick", "steps " + dStepsList);
-        Bundle arguments = new Bundle();
+        //Bundle arguments = new Bundle();
         stepDetailIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
         stepDetailIntent.putExtra(EXTRA_POSITION, position);
-        stepDetailIntent.putExtras(arguments);
+        //stepDetailIntent.putExtras(arguments);
         startActivity(stepDetailIntent);
     }
 }
