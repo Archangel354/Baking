@@ -24,6 +24,9 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     private Button btnNext;
     private BakingModel.Steps steps;
     private ArrayList<BakingModel.Steps> dStepsList;
+    Integer galacticPosition;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +36,19 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
-
         final Intent stepDetailIntent = getIntent();
-        final int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
         final ArrayList<BakingModel.Steps> stepList = stepDetailIntent.getParcelableArrayListExtra(EXTRA_STEPLIST);
-        final String sDescription = stepList.get(position).getDescription();
-        final String sUrlString = stepList.get(position).getVideoURL();
-        Integer arraySize = stepList.size();
-        String mDescription = stepList.get(position + 1).getDescription();
+        final int sPosition = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
+        stepList.set(0, steps).setPosition(sPosition);
+        galacticPosition = stepList.get(0).getPosition();
 
-        Log.i("StepDetailActivity", "position: " + position + ".");
+        final String sDescription = stepList.get(sPosition).getDescription();
+        final String sUrlString = stepList.get(sPosition).getVideoURL();
+        Integer arraySize = stepList.size();
+        String mDescription = stepList.get(sPosition + 1).getDescription();
+        steps.setPosition(sPosition);
+
+        Log.i("StepDetailActivity", "position: " + sPosition + ".");
         Log.i("StepDetailActivity", "description: " + sDescription + ".");
         Log.i("StepDetailActivity", "stepList: " + stepList + ".");
 
@@ -58,34 +64,37 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(StepDetailActivity.this, "Next Pressed", Toast.LENGTH_SHORT).show();
-               /// Toast.makeText(StepDetailActivity.this, "Next position is: " + position, Toast.LENGTH_SHORT).show();
-               // Toast.makeText(StepDetailActivity.this, "Next dStepsList is: " + dStepsList, Toast.LENGTH_SHORT).show();
-                Integer nextPosition = position + 1;
-                Log.i("Next", "nextPosition: " + nextPosition);
-                Log.i("Next", "stepList " + stepList);
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Toast.makeText(StepDetailActivity.this, "Next Pressed", Toast.LENGTH_SHORT).show();
+//               /// Toast.makeText(StepDetailActivity.this, "Next position is: " + position, Toast.LENGTH_SHORT).show();
+//               // Toast.makeText(StepDetailActivity.this, "Next dStepsList is: " + dStepsList, Toast.LENGTH_SHORT).show();
+//                Integer nextPosition = position + 1;
+//                Log.i("Next", "nextPosition: " + nextPosition);
+//                Log.i("Next", "stepList " + stepList);
+//
+//                Intent stepDetailIntent = new Intent(v.getContext(), StepDetailActivity.class);
+//                BakingModel.Steps clickedItem = stepList.get(position + 1);
+//                Log.i("Next", "step " + clickedItem.getDescription());
+//                Log.i("Next", "video " + clickedItem.getVideoURL());
+//                Log.i("Next", "steps " + stepList);
+//                //Bundle arguments = new Bundle();
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                Bundle arguments = new Bundle();
+//                arguments.putString(EXTRA_STEP, clickedItem.getDescription());
+//                arguments.putString(EXTRA_VIDEO,clickedItem.getVideoURL());
+//                StepFragment stepFragment = new StepFragment();
+//                stepFragment.setArguments(arguments);
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.step_container, stepFragment)
+//                        .commit();
+//
+//            }
+//        });
 
-                Intent stepDetailIntent = new Intent(v.getContext(), StepDetailActivity.class);
-                BakingModel.Steps clickedItem = stepList.get(position + 1);
-                Log.i("Next", "step " + clickedItem.getDescription());
-                Log.i("Next", "video " + clickedItem.getVideoURL());
-                Log.i("Next", "steps " + stepList);
-                //Bundle arguments = new Bundle();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                Bundle arguments = new Bundle();
-                arguments.putString(EXTRA_STEP, clickedItem.getDescription());
-                arguments.putString(EXTRA_VIDEO,clickedItem.getVideoURL());
-                StepFragment stepFragment = new StepFragment();
-                stepFragment.setArguments(arguments);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.step_container, stepFragment)
-                        .commit();
+        btnNext.setOnClickListener(new BtnNextListener());
 
-            }
-        });
 
         if (savedInstanceState == null) {
             // In two-pane mode, add initial BodyPartFragments to the screen
@@ -102,6 +111,36 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
                     .add(R.id.step_container, stepFragment)
                     .commit();
 
+        }
+    }
+
+    public  class BtnNextListener implements View.OnClickListener
+    {
+        Integer sPosition = steps.getPosition();
+        //String mDescription = stepList.get(sPosition + 1).getDescription();
+
+        @Override
+        public void onClick(View v) {
+
+                            Integer nextPosition = sPosition + 1;
+                Log.i("Next", "nextPosition: " + nextPosition);
+                Log.i("Next", "stepList " + dStepsList);
+
+                Intent stepDetailIntent = new Intent(v.getContext(), StepDetailActivity.class);
+                BakingModel.Steps clickedItem = dStepsList.get(nextPosition);
+                Log.i("BtnNextListener", "step " + clickedItem.getDescription());
+                Log.i("BtnNextListener", "video " + clickedItem.getVideoURL());
+                Log.i("BtnNextListener", "steps " + dStepsList);
+                //Bundle arguments = new Bundle();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Bundle arguments = new Bundle();
+                arguments.putString(EXTRA_STEP, clickedItem.getDescription());
+                arguments.putString(EXTRA_VIDEO,clickedItem.getVideoURL());
+                StepFragment stepFragment = new StepFragment();
+                stepFragment.setArguments(arguments);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.step_container, stepFragment)
+                        .commit();
         }
     }
 

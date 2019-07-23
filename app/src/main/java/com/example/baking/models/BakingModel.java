@@ -76,13 +76,22 @@ public class BakingModel {
     }
 
     public static class Steps implements Parcelable {
+        private int position;
         private String shortDescription;
         private String description;
         private String videoURL;
         private String thumbnailURL;
 
+        public int getPosition() {
+            return position;
+        }
+
+        public void setPosition(int position) {
+            this.position = position;
+        }
 
         public Steps(Parcel in) {
+            position = in.readInt();
             shortDescription = in.readString();
             description = in.readString();
             videoURL = in.readString();
@@ -95,6 +104,7 @@ public class BakingModel {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(position);
             dest.writeString(shortDescription);
             dest.writeString(description);
             dest.writeString(videoURL);
