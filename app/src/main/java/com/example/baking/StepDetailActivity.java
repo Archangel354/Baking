@@ -118,6 +118,8 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+
+
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             Bundle arguments = new Bundle();
