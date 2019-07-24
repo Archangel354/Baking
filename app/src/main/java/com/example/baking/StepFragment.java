@@ -1,6 +1,7 @@
 package com.example.baking;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -116,7 +117,7 @@ public class StepFragment extends Fragment {
 
 
 //EXTRA_STEP
-        if (mStep != null) {
+        if ((mStep != null) && (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) ){
             // Inflate the Android-Me fragment layout
             TextView text = rootView.findViewById(R.id.step_description);
             text.setText(mStep);
