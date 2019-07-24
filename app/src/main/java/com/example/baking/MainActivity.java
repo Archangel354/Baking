@@ -1,6 +1,7 @@
 package com.example.baking;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +45,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         stepsArrayList = new ArrayList<BakingModel.Steps>();
         rRecyclerView =  findViewById(R.id.recycler_view);
         rRecyclerView.setHasFixedSize(true);
-        rRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (this.getResources().getConfiguration().smallestScreenWidthDp < 600) {
+
+            rRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
         parseJSON();
