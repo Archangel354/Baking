@@ -46,15 +46,17 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         bakingModelList = new ArrayList<>();
         outer = new ArrayList<ArrayList<BakingModel.Steps>>();
         stepsArrayList = new ArrayList<BakingModel.Steps>();
-        rRecyclerView =  findViewById(R.id.recycler_view);
-        rRecyclerView.setHasFixedSize(true);
-        if (this.getResources().getConfiguration().smallestScreenWidthDp < 600) {
 
+        if (this.getResources().getConfiguration().smallestScreenWidthDp <= 600) {
+
+            rRecyclerView =  findViewById(R.id.recycler_view);
+            rRecyclerView.setHasFixedSize(true);
             rRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         } else {
             // Change the GridView to space out the images more on tablet
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
+            rRecyclerView =  findViewById(R.id.sw600Recycler_view);
+            rRecyclerView.setHasFixedSize(true);
+            rRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
         }
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
