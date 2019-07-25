@@ -5,9 +5,11 @@ import android.content.res.Configuration;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     ArrayList<ArrayList<BakingModel.Steps>> outer;
     public static final String EXTRA_INGREDIENTS = "ingredients";
     public static final String EXTRA_STEPS = "steps";
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         if (this.getResources().getConfiguration().smallestScreenWidthDp < 600) {
 
             rRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            // Change the GridView to space out the images more on tablet
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
         }
         rRecipeList = new ArrayList<>();
         rRequestQueue = Volley.newRequestQueue(this);
