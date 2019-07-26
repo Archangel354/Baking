@@ -44,12 +44,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
         ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
-        Integer position = intent.getIntExtra(EXTRA_POSITION);
         dStepsList = steps;
-        BakingModel.Steps clickedItem = dStepsList.get(position);
-        String tDescription = clickedItem.getDescription();
-        String tVideoURL = clickedItem.getVideoURL();
-        Log.i("DetailActivity", "steps " + steps);
 
         dAdapter = new DetailAdapter(DetailActivity.this, dStepsList);
         dRecyclerView.setHasFixedSize(true);
@@ -61,25 +56,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
         textIngredients.setText(ingredients);
 
-        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600) {
-            Log.i("TABLET", "before sSavedInstanceState step " + tDescription);
-            Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
 
-
-            //if (sSavedInstanceState == null) {
-            Log.i("TABLET", "step " + tDescription);
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            Bundle arguments = new Bundle();
-            arguments.putString(EXTRA_STEP, tDescription);
-            arguments.putString(EXTRA_VIDEO, tVideoURL);
-            StepFragment stepFragment = new StepFragment();
-            stepFragment.setArguments(arguments);
-            fragmentManager.beginTransaction()
-                    .add(R.id.step_container, stepFragment)
-                    .commit();
-            //}
-        }
     }
 
     @Override
@@ -92,18 +69,36 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         String tVideoURL = clickedItem.getVideoURL();
 
 
-        Log.i("OnItemClick", "step " + tDescription);
-        Log.i("OnItemClick", "video " + tVideoURL);
-        Log.i("OnItemClick", "steps " + dStepsList);
-        Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
 
-        //Bundle arguments = new Bundle();
-        stepDetailIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
-        stepDetailIntent.putExtra(EXTRA_POSITION, position);
-        //stepDetailIntent.putExtras(arguments);
+        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600) {
+            Log.i("TABLET", "before sSavedInstanceState step " + tDescription);
+            Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
+
+            Log.i("TABLET", "step " + tDescription);
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Bundle arguments = new Bundle();
+            arguments.putString(EXTRA_STEP, tDescription);
+            arguments.putString(EXTRA_VIDEO, tVideoURL);
+            StepFragment stepFragment = new StepFragment();
+            stepFragment.setArguments(arguments);
+            fragmentManager.beginTransaction()
+                    .add(R.id.step_container, stepFragment)
+                    .commit();
+            //}
+        } else {
+
+
+            Log.i("OnItemClick", "step " + tDescription);
+            Log.i("OnItemClick", "video " + tVideoURL);
+            Log.i("OnItemClick", "steps " + dStepsList);
+            Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
+
+            //Bundle arguments = new Bundle();
+            stepDetailIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
+            stepDetailIntent.putExtra(EXTRA_POSITION, position);
+            //stepDetailIntent.putExtras(arguments);
             startActivity(stepDetailIntent);
-
-
-
+        }
     }
 }
