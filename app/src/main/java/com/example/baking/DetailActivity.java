@@ -2,6 +2,7 @@ package com.example.baking;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     public static final String EXTRA_STEP = "step";
     public static final String EXTRA_STEPLIST = "steplist";
     public static final String EXTRA_POSITION = "position";
+    //Bundle sSavedInstanceState;
 
 
     @Override
@@ -62,13 +64,43 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         Log.i("OnItemClick", "DetailActivity");
         Intent stepDetailIntent = new Intent(this, StepDetailActivity.class);
         BakingModel.Steps clickedItem = dStepsList.get(position);
-        Log.i("OnItemClick", "step " + clickedItem.getDescription());
-        Log.i("OnItemClick", "video " + clickedItem.getVideoURL());
+        String tDescription = clickedItem.getDescription();
+        String tVideoURL = clickedItem.getVideoURL();
+
+
+        Log.i("OnItemClick", "step " + tDescription);
+        Log.i("OnItemClick", "video " + tVideoURL);
         Log.i("OnItemClick", "steps " + dStepsList);
+        Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
+
         //Bundle arguments = new Bundle();
         stepDetailIntent.putParcelableArrayListExtra(EXTRA_STEPLIST, dStepsList);
         stepDetailIntent.putExtra(EXTRA_POSITION, position);
         //stepDetailIntent.putExtras(arguments);
-        startActivity(stepDetailIntent);
+        if (this.getResources().getConfiguration().smallestScreenWidthDp < 600) {
+            Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
+
+            startActivity(stepDetailIntent);
+        }
+
+        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600) {
+            Log.i("TABLET", "before sSavedInstanceState step " + tDescription);
+            Log.i("TABLET", "smallestScreenWidthDp: " + this.getResources().getConfiguration().smallestScreenWidthDp);
+
+
+            //if (sSavedInstanceState == null) {
+                Log.i("TABLET", "step " + tDescription);
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Bundle arguments = new Bundle();
+                arguments.putString(EXTRA_STEP, tDescription);
+                arguments.putString(EXTRA_VIDEO, tVideoURL);
+                StepFragment stepFragment = new StepFragment();
+                stepFragment.setArguments(arguments);
+                fragmentManager.beginTransaction()
+                        .add(R.id.step_container, stepFragment)
+                        .commit();
+            //}
+        }
     }
 }

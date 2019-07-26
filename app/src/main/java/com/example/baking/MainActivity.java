@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         outer = new ArrayList<ArrayList<BakingModel.Steps>>();
         stepsArrayList = new ArrayList<BakingModel.Steps>();
 
-        if (this.getResources().getConfiguration().smallestScreenWidthDp <= 600) {
+        if (this.getResources().getConfiguration().smallestScreenWidthDp < 600) {
 
             rRecyclerView =  findViewById(R.id.recycler_view);
             rRecyclerView.setHasFixedSize(true);
