@@ -106,6 +106,7 @@ public class StepFragment extends Fragment {
             View rootView = inflater.inflate(R.layout.fragment_step, container, false);
             unbinder = ButterKnife.bind(this, rootView);
             TextView text = rootView.findViewById(R.id.step_description);
+
             text.setText(mStep);
             getPlayer();
             return rootView;

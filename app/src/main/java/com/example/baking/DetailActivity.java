@@ -83,7 +83,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
             StepFragment stepFragment = new StepFragment();
             stepFragment.setArguments(arguments);
             fragmentManager.beginTransaction()
-                    .add(R.id.step_container, stepFragment)
+                    .replace(R.id.step_container, stepFragment)
                     .commit();
             //}
         } else {
