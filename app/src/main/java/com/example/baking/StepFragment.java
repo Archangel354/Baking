@@ -62,21 +62,12 @@ public class StepFragment extends Fragment {
     // DONE: Rename and change types of parameters
     private ArrayList<Integer> mDescriptionIds;
     private int mListIndex;
-
     private BakingModel.Steps steps;
-    //protected String mStep;
     protected String mUrlString = null;
-    //private SimpleExoPlayer sPlayer;
-   //private PlayerView sPlayerView;
 
     @BindView(R.id.imgNoVideo)
     ImageView imgNoVideo;
-
-    //@BindView(R.id.step_description)
    String mStep;
-
-
-
 
     // new stuff based on example
     @BindView(R.id.imgInstructionVideo)
@@ -84,17 +75,11 @@ public class StepFragment extends Fragment {
     private SimpleExoPlayer sPlayer;
     private Unbinder unbinder;
 
-    public StepFragment() {
-        // Required empty public constructor
-
-    }
+    public StepFragment() { /** Required empty public constructor **/    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //View view = inflater.inflate(R.layout.fragment_step, container, false);
-
         if (getArguments().containsKey(EXTRA_STEP)) {
             mStep = getArguments().getString(EXTRA_STEP);
             Log.i("StepFragment","mStep: " +mStep );
@@ -106,40 +91,41 @@ public class StepFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_step, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
 
-
-
-//EXTRA_STEP
-        if ((mStep != null) && (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) ){
-            // Inflate the Android-Me fragment layout
-            TextView text = rootView.findViewById(R.id.step_description);
-            text.setText(mStep);
-        }
-        else {
-            Log.i("DescriptionFragment","steps is null");
-        }
-
-
-
-
-
-        Log.i("StepFragment oCV","mStep: " +mStep );
-//
-//        // Load the saved state (the list of images and list index) if there is one
+        //        // Load the saved state (the list of images and list index) if there is one
         if(savedInstanceState != null) {
             mDescriptionIds = savedInstanceState.getIntegerArrayList(DESCRIPTION_ID_LIST);
             mListIndex = savedInstanceState.getInt(LIST_INDEX);
         }
 
-        getPlayer();
-        return rootView;
+        if ((this.getResources().getConfiguration().smallestScreenWidthDp < 600) && ((mStep != null) &&
+                (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT))) {
+            View rootView = inflater.inflate(R.layout.fragment_step, container, false);
+            unbinder = ButterKnife.bind(this, rootView);
+            TextView text = rootView.findViewById(R.id.step_description);
+            text.setText(mStep);
+            getPlayer();
+            return rootView;
+        }
+
+        if (this.getResources().getConfiguration().smallestScreenWidthDp >= 600) {
+            View rootView = inflater.inflate(R.layout.fragment_step, container, false);
+            unbinder = ButterKnife.bind(this, rootView);
+            TextView text = rootView.findViewById(R.id.step_description);
+            Log.i("StepFragment","mStep is: " + mStep);
+            text.setText(mStep);
+            getPlayer();
+            return rootView;
+        }
+
+
+
+        Log.i("StepFragment","returning null and mStep is: " + mStep);
+
+       return null;
         }
 
         private void getPlayer(){
