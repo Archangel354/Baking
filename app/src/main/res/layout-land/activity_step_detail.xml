@@ -11,8 +11,7 @@
     <!-- This container holds the description Fragment of the Baking Step Detail View -->
     <FrameLayout android:id="@+id/step_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_height="match_parent"
         android:scaleType="centerInside"/>
 
 

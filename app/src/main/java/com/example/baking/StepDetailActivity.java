@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import static com.example.baking.DetailActivity.EXTRA_POSITION;
@@ -27,15 +29,19 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
     private ArrayList<BakingModel.Steps> dStepsList;
     private int mListIndex;
     private int stepListsize;
+    private FrameLayout sFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
+        Log.i("StepDetailActivity", "Orientation change: ");
+
 
 
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
+        sFrameLayout = findViewById(R.id.step_container);
 
         final Intent stepDetailIntent = getIntent();
         final int position = stepDetailIntent.getIntExtra(EXTRA_POSITION, 0);
@@ -120,6 +126,14 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
             });
         }
 
+        if ((this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                &&((this.getResources().getConfiguration().smallestScreenWidthDp < 600))){
+            btnPrevious.setVisibility(View.GONE);
+            btnNext.setVisibility(View.GONE);
+
+
+        }
+
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             Bundle arguments = new Bundle();
@@ -134,13 +148,29 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        }
 
     @Override
     public void onClick(View v) {
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            btnPrevious.setVisibility(View.GONE);
+            btnNext.setVisibility(View.GONE);
+//            sFrameLayout.setLayoutParams(new ViewGroup.LayoutParams(
+//                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+//            ));
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            btnPrevious.setVisibility(View.VISIBLE);
+            btnNext.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 }
