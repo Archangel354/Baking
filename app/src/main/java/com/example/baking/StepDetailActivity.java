@@ -128,8 +128,10 @@ public class StepDetailActivity extends AppCompatActivity implements View.OnClic
 
         if ((this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
                 &&((this.getResources().getConfiguration().smallestScreenWidthDp < 600))){
-            btnPrevious.setVisibility(View.GONE);
-            btnNext.setVisibility(View.GONE);
+            if((btnNext != null) && (btnPrevious != null)) {
+                btnPrevious.setVisibility(View.GONE);
+                btnNext.setVisibility(View.GONE);
+            }
 
 
         }

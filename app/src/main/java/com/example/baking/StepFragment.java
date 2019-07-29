@@ -189,9 +189,10 @@ public class StepFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
-
-        // Release the player when it is not needed
-        sPlayer.release();
+        if (sPlayer != null) {
+            unbinder.unbind();
+            // Release the player when it is not needed
+            sPlayer.release();
+        }
     }
 }
