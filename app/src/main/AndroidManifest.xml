@@ -11,20 +11,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
+        <receiver android:name=".RecipeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recipe_widget_info" />
+        </receiver>
+
         <activity
             android:name=".StepDetailActivity"
+            android:configChanges="orientation|screenSize|layoutDirection"
             android:label="Step Detail View"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize|layoutDirection"
-            android:parentActivityName=".DetailActivity"></activity>
+            android:parentActivityName=".DetailActivity" />
         <activity
             android:name=".DetailActivity"
+            android:configChanges="orientation|screenSize|layoutDirection"
             android:label="Ingredients and Steps"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize|layoutDirection"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
