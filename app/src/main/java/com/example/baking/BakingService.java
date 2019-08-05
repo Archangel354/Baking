@@ -14,12 +14,13 @@ import android.content.Context;
 public class BakingService extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_UPDATE_RECIPE = "com.example.baking.action.update_recipe";
+    private static final String ACTION_UPDATE_RECIPE_WIDGET = "com.example.baking.action.update_recipe";
+
     private static final String ACTION_BAZ = "com.example.baking.action.BAZ";
 
     // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "com.example.baking.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "com.example.baking.extra.PARAM2";
+    private static final String EXTRA_RECIPE = "com.example.baking.extra.RECIPE";
+    private static final String EXTRA_INGREDIENTS = "com.example.baking.extra.INGREDIENTS";
 
     public BakingService() {
         super("BakingService");
@@ -32,11 +33,11 @@ public class BakingService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionUpdateRecipe(Context context, String param1, String param2) {
+    public static void startActionUpdateRecipe(Context context, String recipe, String ingredients) {
         Intent intent = new Intent(context, BakingService.class);
-        intent.setAction(ACTION_UPDATE_RECIPE);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.setAction(ACTION_UPDATE_RECIPE_WIDGET);
+        intent.putExtra(EXTRA_RECIPE, recipe);
+        intent.putExtra(EXTRA_INGREDIENTS, ingredients);
         context.startService(intent);
     }
 
@@ -50,8 +51,8 @@ public class BakingService extends IntentService {
     public static void startActionBaz(Context context, String param1, String param2) {
         Intent intent = new Intent(context, BakingService.class);
         intent.setAction(ACTION_BAZ);
-        intent.putExtra(EXTRA_PARAM1, param1);
-        intent.putExtra(EXTRA_PARAM2, param2);
+        intent.putExtra(EXTRA_RECIPE, param1);
+        intent.putExtra(EXTRA_INGREDIENTS, param2);
         context.startService(intent);
     }
 
@@ -59,13 +60,13 @@ public class BakingService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_UPDATE_RECIPE.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
+            if (ACTION_UPDATE_RECIPE_WIDGET.equals(action)) {
+                final String param1 = intent.getStringExtra(EXTRA_RECIPE);
+                final String param2 = intent.getStringExtra(EXTRA_INGREDIENTS);
                 handleActionUpdateRecipe(param1, param2);
             } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
+                final String param1 = intent.getStringExtra(EXTRA_RECIPE);
+                final String param2 = intent.getStringExtra(EXTRA_INGREDIENTS);
                 handleActionBaz(param1, param2);
             }
         }
