@@ -8,23 +8,29 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * Implementation of App Widget functionality.
  */
 public class RecipeWidget extends AppWidgetProvider {
-
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+        String timeString =  DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
+        views.setTextViewText(R.id.update_value,  context.getResources().getString(R.string.time, timeString));
 
-        // Create an Intent to launch MainaActivity when widget is clicked
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        Intent intentUpdate = new Intent(context, RecipeWidget.class);
+        intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 
+        PendingIntent pendingUpdate = PendingIntent.getBroadcast(
+                context, appWidgetId, intentUpdate,
+                PendingIntent.FLAG_UPDATE_CURRENT);
         //Widgets allow click handlers to only launch pending intents
-        views.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
+        views.setOnClickPendingIntent(R.id.update, pendingUpdate);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -39,14 +45,5 @@ public class RecipeWidget extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
-
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
 }
 
