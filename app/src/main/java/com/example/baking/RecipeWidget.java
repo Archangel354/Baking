@@ -44,6 +44,5 @@ public class RecipeWidget extends AppWidgetProvider {
             Toast.makeText(context, "Widget has been updated! ", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
 
