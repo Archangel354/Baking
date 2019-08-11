@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -21,10 +22,16 @@ public class RecipeWidget extends AppWidgetProvider {
         String timeString =  DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        views.setTextViewText(R.id.update_value,  context.getResources().getString(R.string.time, timeString));
+		views.setTextViewText(R.id.update_value,  context.getResources().getString(R.string.time, timeString));
+        Log.i("LOG RecipeWidget", "timeString: " +timeString);
+
+
 
         Intent intentUpdate = new Intent(context, RecipeWidget.class);
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        int[] idArray = new int[]{appWidgetId};
+        intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
 
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(
                 context, appWidgetId, intentUpdate,
