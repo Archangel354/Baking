@@ -19,6 +19,7 @@ public class RecipeWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+
         String timeString =  DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
@@ -26,6 +27,8 @@ public class RecipeWidget extends AppWidgetProvider {
         Log.i("LOG RecipeWidget", "timeString: " +timeString);
 
 
+
+        Log.i("RecipeWidget", "appWidgetId: " + appWidgetId);
 
         Intent intentUpdate = new Intent(context, RecipeWidget.class);
         intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -49,6 +52,8 @@ public class RecipeWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
             Toast.makeText(context, "Widget has been updated! ", Toast.LENGTH_SHORT).show();
+            Log.i("Widget onUpdate", "appWidgetId: " + appWidgetId);
+
         }
     }
 }

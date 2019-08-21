@@ -139,5 +139,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         detailIntent.putExtra(EXTRA_INGREDIENTS, stepsItem.getIngredientsList());
         detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));
         startActivity(detailIntent);
+
+        Intent widgetIntent = new Intent(this, RecipeWidget.class);
+        widgetIntent.putExtra(EXTRA_INGREDIENTS, stepsItem.getIngredientsList());
+//        startActivity(widgetIntent);
     }
 }
