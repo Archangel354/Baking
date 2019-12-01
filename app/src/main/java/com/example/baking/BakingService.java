@@ -14,7 +14,7 @@ import android.content.Context;
 public class BakingService extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_UPDATE_RECIPE_WIDGET = "com.example.baking.action.update_recipe";
+    private static final String ACTION_FETCH_INGREDIENTS = "com.example.baking.action.update_recipe";
 
     private static final String ACTION_BAZ = "com.example.baking.action.BAZ";
 
@@ -35,7 +35,7 @@ public class BakingService extends IntentService {
     // TODO: Customize helper method
     public static void startActionUpdateRecipe(Context context, String recipe, String ingredients) {
         Intent intent = new Intent(context, BakingService.class);
-        intent.setAction(ACTION_UPDATE_RECIPE_WIDGET);
+        intent.setAction(ACTION_FETCH_INGREDIENTS);
         intent.putExtra(EXTRA_RECIPE, recipe);
         intent.putExtra(EXTRA_INGREDIENTS, ingredients);
         context.startService(intent);
@@ -60,7 +60,7 @@ public class BakingService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_UPDATE_RECIPE_WIDGET.equals(action)) {
+            if (ACTION_FETCH_INGREDIENTS.equals(action)) {
                 final String param1 = intent.getStringExtra(EXTRA_RECIPE);
                 final String param2 = intent.getStringExtra(EXTRA_INGREDIENTS);
                 handleActionUpdateRecipe(param1, param2);
