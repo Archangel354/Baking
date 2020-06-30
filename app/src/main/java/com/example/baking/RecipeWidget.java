@@ -16,13 +16,14 @@ import java.util.Date;
  * Implementation of App Widget functionality.
  */
 public class RecipeWidget extends AppWidgetProvider {
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,int appWidgetId) {
 
         String timeString =  DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-		views.setTextViewText(R.id.update_value,  context.getResources().getString(R.string.time, timeString));
+		views.setTextViewText(R.id.time_value,  context.getResources().getString(R.string.time, timeString));
+        views.setTextViewText(R.id.recipe_value,  context.getResources().getString(R.string.time, timeString));
+        views.setTextViewText(R.id.ingredients_value,  context.getResources().getString(R.string.time, timeString));
         Log.i("LOG RecipeWidget", "timeString: " +timeString);
 
 
