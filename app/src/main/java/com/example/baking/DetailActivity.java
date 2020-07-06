@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.example.baking.MainActivity.EXTRA_INGREDIENTS;
+import static com.example.baking.MainActivity.EXTRA_RECIPENAME;
 import static com.example.baking.MainActivity.EXTRA_STEPS;
 
 
@@ -42,6 +43,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         dRecyclerView =  findViewById(R.id.recyclerDetail_view);
 
         Intent intent = getIntent();
+        String recipename = intent.getStringExtra(EXTRA_RECIPENAME);
         String ingredients = intent.getStringExtra(EXTRA_INGREDIENTS);
         ArrayList steps = intent.getStringArrayListExtra(EXTRA_STEPS);
         dStepsList = steps;
@@ -56,7 +58,9 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         TextView textIngredients = findViewById(R.id.txtIngredientsList);
         textIngredients.setText(ingredients);
 
-
+        Intent widgetIntent = new Intent(this, RecipeWidget.class);
+        widgetIntent.putExtra(EXTRA_RECIPENAME, recipename);
+        Log.i("TABLET", "recipe name is: " + recipename);
     }
 
     @Override

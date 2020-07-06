@@ -34,9 +34,7 @@ public class RecipeWidget extends AppWidgetProvider {
         int[] idArray = new int[]{appWidgetId};
         intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
 
-        PendingIntent pendingUpdate = PendingIntent.getBroadcast(
-                context, appWidgetId, intentUpdate,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingUpdate = PendingIntent.getBroadcast( context, appWidgetId, intentUpdate, PendingIntent.FLAG_UPDATE_CURRENT);
         //Widgets allow click handlers to only launch pending intents
         views.setOnClickPendingIntent(R.id.update, pendingUpdate);
 

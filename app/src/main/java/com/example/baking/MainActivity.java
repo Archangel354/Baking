@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
     private ArrayList<BakingModel> bakingModelList;
     private ArrayList<BakingModel.Steps> stepsArrayList;
     ArrayList<ArrayList<BakingModel.Steps>> outer;
+    public static final String EXTRA_RECIPENAME = "recipe";
     public static final String EXTRA_INGREDIENTS = "ingredients";
     public static final String EXTRA_STEPS = "steps";
     private RecyclerView mRecyclerView;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.OnI
         BakingModel stepsItem = bakingModelList.get(position);
         Log.i("OnClick", "ingredients " + clickedItem.getIngredientsList());
         Log.i("OnClick", "getStepsList:\n " + stepsItem.getStepsList().get(position));
+        detailIntent.putExtra(EXTRA_RECIPENAME, stepsItem.getRecipeName());
         detailIntent.putExtra(EXTRA_INGREDIENTS, stepsItem.getIngredientsList());
         detailIntent.putExtra(EXTRA_STEPS, (Serializable) stepsItem.getStepsList().get(position));
         startActivity(detailIntent);
