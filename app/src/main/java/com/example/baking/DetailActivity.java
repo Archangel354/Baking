@@ -1,6 +1,9 @@
 package com.example.baking;
 
+import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +29,7 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
 
     private RecyclerView dRecyclerView;
     private ArrayList<BakingModel.Steps> dStepsList;
+    private SharedPreferences mSharedPreferences;
 
     /** Adapter for the gridview of movies from the JSON data */
     private DetailAdapter dAdapter;
@@ -33,6 +37,11 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
     public static final String EXTRA_STEP = "step";
     public static final String EXTRA_STEPLIST = "steplist";
     public static final String EXTRA_POSITION = "position";
+    public static final String WIDGET_PREFERENCES = "widgetinfo";
+    public static final String RECIPE_KEY = "recipename";
+    public static final String INGREDIENTS_KEY = "ingredientlist";
+
+
     //Bundle sSavedInstanceState;
 
 
@@ -41,6 +50,9 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         dRecyclerView =  findViewById(R.id.recyclerDetail_view);
+        mSharedPreferences = getSharedPreferences("widgetinfo",MODE_PRIVATE);
+
+
 
         Intent intent = getIntent();
         String recipename = intent.getStringExtra(EXTRA_RECIPENAME);
@@ -59,7 +71,18 @@ public class DetailActivity extends AppCompatActivity implements DetailAdapter.O
         textIngredients.setText(ingredients);
 
         Intent widgetIntent = new Intent(this, RecipeWidget.class);
+        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         widgetIntent.putExtra(EXTRA_RECIPENAME, recipename);
+        widgetIntent.putExtra(EXTRA_INGREDIENTS, ingredients);
+        sendBroadcast(widgetIntent);
+
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(RECIPE_KEY, recipename);
+        editor.putString(INGREDIENTS_KEY, ingredients);
+        if (editor.commit()){
+            Toast.makeText(this, "Saved recipe and ingredients",Toast.LENGTH_LONG).show();
+        }
+
         Log.i("TABLET", "recipe name is: " + recipename);
     }
 
